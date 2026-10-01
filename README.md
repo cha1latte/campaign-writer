@@ -46,12 +46,12 @@ Four of them are yours to play right now, with GM book, handouts, maps and VTT f
 ## 📦 What's in the box
 
 ```text
-📕 GM book (PDF)         overview, every location keyed, NPCs with voices and secrets, stat blocks, endings
-📗 Player handouts       the pitch, reference cards, pregenerated characters, player maps
-📙 Found in play         letters, logs and notices the GM hands over when the players find them
-🗺️  Maps                 GM version · player version · VTT image · Foundry walls · Universal VTT (.dd2vtt)
-⚖️  Balanced fights      encounter budgets from your game's own rules, checked by a script
-🦉 Foundry hand-off      ready-made journal pages for Familiar's AI game master
+📕 GM book           every place keyed, NPCs, stat blocks, endings
+📗 Player handouts   the pitch, pregens, reference cards, player maps
+📙 Found in play     letters and logs the GM hands over when found
+🗺️  Maps             GM · player · VTT image · walls · .dd2vtt
+⚖️  Balanced fights  budgets from your game's own rules
+🦉 Foundry hand-off  journal pages for Familiar's AI game master
 ```
 
 ## 🎓 Teach mode: learn by playing
