@@ -1,0 +1,4 @@
+interface:
+  display_name: "Campaign Writer"
+  short_description: "Turn a rough idea into a complete, downloadable tabletop adventure, with an optional Teach mode"
+  default_prompt: "Use $campaign-writer to write a complete adventure from this idea, with a GM book PDF, maps, handouts and checked encounter maths."

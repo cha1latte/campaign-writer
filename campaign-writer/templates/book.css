@@ -1,0 +1,155 @@
+/* Campaign Writer book style. Print-first; Chrome/Edge 131+ for page numbers. */
+:root {
+  --ink: #1e2a33;
+  --text: #24211d;
+  --accent: #1f4a5c;      /* headings */
+  --ochre: #b07a26;       /* rules, bars */
+  --cream: #f5edd9;       /* read-aloud */
+  --parch: #f8f2e3;       /* stat blocks */
+  --lesson: #e7f0e4;
+  --lesson-bar: #3b6b47;
+  --gm: #8a2f1f;
+  --rule: #d8ccb2;
+}
+@page { size: letter; margin: 0.7in 0.62in 0.78in 0.62in;
+  @bottom-center { content: counter(page); font-family: 'Alegreya SC', Georgia, serif; font-size: 10pt; color: #7b6a4f; }
+}
+@page cover { margin: 0; @bottom-center { content: none; } }
+@page toc { @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: 'Alegreya', Georgia, 'Times New Roman', serif; font-size: 10.6pt; line-height: 1.36;
+  color: var(--text); background: #fff; hyphens: auto; -webkit-hyphens: auto; orphans: 3; widows: 3; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Cover */
+.cover { page: cover; height: 11in; width: 8.5in; padding: 0.55in; background: #ecdfc2;
+  background-image: radial-gradient(ellipse at 50% 40%, #f7efd9 0%, #ecdfc2 60%, #d9c59c 100%); break-after: page; }
+.cover-frame { height: 100%; border: 3px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -9px;
+  padding: 0.55in 0.5in 0.45in; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.cover-kind { font-family: 'Alegreya Sans', sans-serif; letter-spacing: 0.32em; text-transform: uppercase; font-size: 10pt; color: #6b5838; }
+.cover-title { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 44pt; line-height: 1.02; margin: 0.18in 0 0.1in;
+  color: var(--ink); border: none; column-span: none; }
+.cover-tagline { font-style: italic; font-size: 15pt; color: #4a3d2a; max-width: 5.6in; }
+.cover-teach { margin-top: 0.16in; font-family: 'Alegreya Sans', sans-serif; font-weight: 700; font-size: 10.5pt; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #fff; background: var(--lesson-bar); padding: 5px 14px; border-radius: 3px; }
+.cover-art { margin: 0.32in 0 0.2in; width: auto; height: auto; max-width: 100%; max-height: 5.7in;
+  box-shadow: 0 6px 18px rgba(60, 40, 10, .28); }
+.cover-facts { margin-top: auto; font-family: 'Alegreya Sans', sans-serif; font-size: 11pt; color: var(--ink); padding-top: 0.15in;
+  border-top: 1px solid var(--ochre); }
+.cover-credit { margin-top: 6px; font-size: 9pt; color: #6b5838; font-family: 'Alegreya Sans', sans-serif; }
+
+/* Contents */
+.toc { page: toc; break-after: page; }
+.toc-title { font-family: 'Alegreya SC', Georgia, serif; font-size: 28pt; color: var(--accent); border-bottom: 2px solid var(--ochre);
+  margin: 0 0 0.2in; padding-bottom: 4px; }
+.toc ul { list-style: none; padding: 0; margin: 0; column-count: 2; column-gap: 0.4in; }
+.toc li { break-inside: avoid; }
+.toc-1 { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 12.5pt; margin-top: 9px; color: var(--accent); }
+.toc-2 { font-size: 10.2pt; padding-left: 14px; color: #3d362c; }
+.toc-1 a { color: var(--accent); }
+.toc-2 a { color: #3d362c; }
+
+/* Chapters */
+.chapter { column-count: 2; column-gap: 0.3in; column-fill: balance; break-before: page; }
+h1 { column-span: all; font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 25pt; line-height: 1.05; color: var(--accent);
+  margin: 0 0 0.16in; padding-bottom: 5px; border-bottom: 2px solid var(--ochre); }
+h2 { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 15pt; line-height: 1.1; color: var(--accent);
+  margin: 0.16in 0 0.05in; padding-bottom: 2px; border-bottom: 1px solid var(--rule); break-after: avoid; }
+h3 { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 12pt; color: var(--ink); margin: 0.12in 0 0.03in; break-after: avoid; }
+h4 { font-family: 'Alegreya Sans', sans-serif; font-weight: 700; font-size: 10pt; letter-spacing: .04em; text-transform: uppercase;
+  color: #5d4c32; margin: 0.1in 0 0.02in; break-after: avoid; }
+p { margin: 0 0 0.075in; text-align: justify; }
+ul, ol { margin: 0 0 0.08in; padding-left: 1.15em; }
+li { margin: 0 0 2px; }
+li > ul { margin: 2px 0 0; }
+strong { color: #15110c; }
+hr { border: none; border-top: 1px solid var(--rule); margin: 0.12in 0; }
+.pagebreak { break-after: page; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; background: #f1ebde; padding: 0 3px; border-radius: 2px; }
+pre { font-size: 8.6pt; background: #f4efe3; padding: 6px 8px; white-space: pre-wrap; break-inside: avoid; }
+
+/* Read-aloud */
+.readaloud { background: var(--cream); border-left: 4px solid var(--ochre); padding: 7px 10px 3px 11px; margin: 0.06in 0 0.1in;
+  break-inside: avoid; box-shadow: inset 0 0 0 1px rgba(176, 122, 38, .15); }
+.readaloud p { font-style: italic; text-align: left; color: #2e2618; }
+
+/* Boxes */
+.box { border: 1px solid #b9a77f; background: #fbf8f0; padding: 7px 10px 4px; margin: 0.08in 0 0.12in; break-inside: avoid; position: relative; }
+.box-title { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 11.5pt; color: var(--accent); margin-bottom: 3px; }
+.box-tag { font-family: 'Alegreya Sans', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #7b6a4f; margin-bottom: 1px; }
+.box p { text-align: left; }
+.box.sidebar { border-width: 3px 0 3px 0; border-color: var(--ink); background: #f6f2e8; }
+.box.lesson { background: var(--lesson); border: none; border-left: 5px solid var(--lesson-bar); }
+.box.lesson .box-title, .box.lesson .box-tag { color: var(--lesson-bar); }
+.box.gm { border: 1px dashed var(--gm); background: #fbf1ee; }
+.box.gm .box-title, .box.gm .box-tag { color: var(--gm); }
+.box.tip { border: none; border-left: 3px solid var(--accent); background: #eef3f5; }
+
+/* Stat blocks */
+.statblock { background: var(--parch); border-top: 4px solid var(--accent); border-bottom: 4px solid var(--accent);
+  padding: 6px 9px 4px; margin: 0.08in 0 0.12in; break-inside: avoid; font-family: 'Alegreya Sans', 'Segoe UI', sans-serif;
+  font-size: 9.2pt; line-height: 1.3; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.sb-name { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 14pt; color: var(--accent); line-height: 1.05; }
+.sb-meta { font-style: italic; margin-bottom: 3px; color: #4a4033; }
+.sb-rule { height: 0; border-top: 1.5px solid var(--ochre); margin: 4px 0; }
+.sb-head { font-family: 'Alegreya SC', Georgia, serif; font-size: 11.5pt; color: var(--accent); border-bottom: 1px solid var(--accent);
+  margin: 5px 0 3px; }
+.statblock p { margin: 0 0 3px; text-align: left; }
+.statblock table { margin: 3px 0; font-size: 8.8pt; }
+.statblock th { background: transparent; color: var(--accent); }
+.statblock td, .statblock th { text-align: center; padding: 1px 3px; border: none; }
+.statblock tbody tr:nth-child(odd) td { background: transparent; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 0.05in 0 0.12in; font-size: 9.4pt; break-inside: avoid; }
+th { font-family: 'Alegreya Sans', sans-serif; font-weight: 700; text-align: left; color: #fff; background: var(--accent); padding: 3px 5px; }
+td { padding: 2.5px 5px; vertical-align: top; text-align: left; }
+tbody tr:nth-child(odd) td { background: #f3ecdc; }
+
+/* Figures */
+.fig { margin: 0.08in 0 0.14in; break-inside: avoid; text-align: center; }
+.fig img { max-width: 100%; max-height: 8.6in; border: 1px solid #c9bb9a; }
+.fig.wide { column-span: all; }
+.fig.wide img { max-height: 8.2in; }
+figcaption { font-family: 'Alegreya Sans', sans-serif; font-size: 8.8pt; font-style: italic; color: #5d4c32; margin-top: 3px; }
+
+/* Handouts */
+.handout { break-before: page; max-width: 6.6in; margin: 0 auto; }
+.handout h1 { column-span: none; text-align: center; }
+.handout p { font-size: 11.5pt; }
+.map-handout { max-width: none; text-align: center; }
+.map-handout img { max-width: 100%; max-height: 9.3in; }
+
+/* Layout helpers */
+.keep { break-inside: avoid; }
+.box.long { break-inside: auto; }
+.plate { break-before: page; break-after: page; height: 9.3in; display: flex; flex-direction: column; justify-content: center; }
+.plate .fig { margin: 0; }
+.plate .fig img { max-height: 8.9in; max-width: 100%; }
+.write-lines { margin: 4px 0 10px; }
+.write-lines .wl { height: 0.36in; border-bottom: 1px solid #9c8d70; }
+svg.act { vertical-align: -1.5pt; color: var(--ink); margin: 0 1px; }
+.sym { font-family: 'Segoe UI Symbol', 'Segoe UI', Arial, 'DejaVu Sans', sans-serif; font-size: 0.92em; }
+@page landscape-map { size: letter landscape; margin: 0.45in; @bottom-center { content: none; } }
+.map-handout.landscape { page: landscape-map; max-width: none; height: 7.5in; display: flex; align-items: center; justify-content: center; }
+.map-handout.landscape img { max-height: 7.5in; max-width: 10in; }
+/* Pregens: one dense page each */
+.handout.pregen { max-width: none; font-size: 10.2pt; line-height: 1.32; }
+.handout.pregen p { font-size: 10.4pt; margin-bottom: 0.06in; }
+.handout.pregen h1 { font-size: 22pt; margin-bottom: 0.08in; }
+.handout.pregen table { font-size: 8.8pt; margin: 0.03in 0 0.08in; }
+.handout.pregen ul { margin-bottom: 0.05in; }
+/* Signs and posters: big lettering for in-world notices and young readers */
+.sign { border: 3px double var(--ink); background: #fdf8ea; padding: 14px 18px; margin: 0.1in 0 0.16in; text-align: center; break-inside: avoid; }
+.sign-title { font-family: 'Alegreya SC', Georgia, serif; font-weight: 700; font-size: 24pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.sign p { font-size: 15pt; line-height: 1.35; text-align: center; }
+.sign table { font-size: 13pt; }
+/* Verse and letters keep their line breaks; letters read as plain, larger text */
+.poem, .letter { margin: 0.08in 0 0.14in; break-inside: avoid; }
+.poem { padding-left: 1.2em; font-style: italic; }
+.poem p { text-align: left; }
+.letter { font-family: 'Alegreya', Georgia, serif; font-size: 1.05em; background: #fbf8f0; border: 1px solid #d8ccb2; padding: 10px 14px; }
+.letter p { text-align: left; }
+.handout .letter { font-size: 12pt; }
