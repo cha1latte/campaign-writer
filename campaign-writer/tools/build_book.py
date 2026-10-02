@@ -454,8 +454,9 @@ def cover_html(meta, maps, kind):
     if length.get("label"):  # e.g. "4 or 5 sessions of about 3 hours"
         length_txt = length["label"]
     teach = meta.get("teach")
+    # Stealth style never announces the subject: the cover is the first thing a player sees.
     badge = (f'<div class="cover-teach">Teaches: {html.escape(teach.get("subject", ""))}</div>'
-             if meta.get("mode") == "teach" and teach else "")
+             if meta.get("mode") == "teach" and teach and teach.get("style") != "stealth" else "")
     art = ""
     cover_map = meta.get("cover_map")
     if cover_map and cover_map in maps:

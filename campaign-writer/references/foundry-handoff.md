@@ -35,7 +35,7 @@ From foundry/pages.json ("source"), in order. Page name, then the file and headi
 - Pickup (opening): <where the hero starts, the first decision, what's already happened>
 - Table Profile: <tone, content notes, lethality rule, hint level, solo/party>
 - Trackers: <clocks with their steps>
-- Learning Tracker (Teach mode): its own Start Here page, "6 Learning Tracker", so logging attempts never rewrites the clocks
+- Learning Tracker (Teach mode): its own Start Here page, "6 Learning Tracker", so logging attempts never rewrites the clocks. In Stealth it is GM-side bookkeeping the player is never shown or told about
 - Runner Guide additions: <Teach-mode procedure below, any adventure-specific procedure>
 
 ## Scenes (one per map)
@@ -65,7 +65,17 @@ handouts/found/01-…md (given out in N3), …
 
 An AI GM's instinct is to be helpful, which means solving the puzzle for the player. These lines stop that. They're short because Familiar's Table Rules cap is 3,000 characters for everything; the full procedure lives in the Runner Guide.
 
-**Table Rules lines** (about 600 characters, filled in):
+**Table Rules lines, Stealth** (about 800 characters, filled in; this is the default):
+
+```text
+TEACH MODE, STEALTH (<subject>): the player must never feel taught. Lesson beats are marked in the Source pages and solved in the "Learning Guide" page.
+- Never say lesson, quiz, puzzle, objective, "as you learned". Speak the world's words. Real <subject> terms only from characters who'd say them (Lexicon), never defined in narration.
+- At a lesson beat, read its puzzle in the Learning Guide BEFORE narrating. Pose a situation with a want and a cost, give numbers only through the world, then STOP. Never state or hint the answer first.
+- Stuck or wrong: the world reacts (soft consequence); an ally gives the next hint rung in character.
+- Log attempts silently on the Learning Tracker. No out-of-character debrief. At session end offer the Decoder once, in one line, and only give it if asked.
+```
+
+**Table Rules lines, Open** (about 600 characters, filled in; classrooms, tutors, "quiz me"):
 
 ```text
 TEACH MODE (<subject>): lesson beats are marked in the Source pages and solved in the "Learning Guide" page.
@@ -75,7 +85,27 @@ TEACH MODE (<subject>): lesson beats are marked in the Source pages and solved i
 - Log every attempt on the Learning Tracker page. At session end, ask the debrief questions out of character.
 ```
 
-**Runner Guide section** (full procedure, in the Start Here journal):
+**Runner Guide section, Stealth** (full procedure, in the Start Here journal):
+
+```text
+TEACH MODE PROCEDURE (STEALTH)
+1. Before a lesson beat: get-journal-page on the Learning Guide; find the puzzle (givens, answer range, hint ladder,
+   in-world consequence) and the Lexicon.
+2. Narrate in the world's words. Give the numbers through things the hero can see, hear or ask about, not as a list.
+   Never write "hint:", never announce a challenge. A real <subject> term appears only in the mouth of a character the
+   Lexicon allows, as slang, and is never explained by the narrator.
+3. When the player acts or answers:
+   - inside the range: show it working in the fiction. If a character would want to know why, let them ask in character;
+   - outside it: the soft consequence fires, an ally (in character) offers the next hint rung when asked or when the
+     player stalls. The full consequence fires only when they act on a wrong answer;
+   - "I don't know" / "help": the next rung only, spoken by an ally.
+4. Misconception moments: let them act on the wrong idea, show what really happens, let a character react. Never lecture.
+5. Log on the "6 Learning Tracker" page, one line per attempt: date, beat or puzzle id, first answer, hints, result.
+6. Session end (before Closeout): one line, "Want the decoder for tonight?" Give the Decoder block for the beats actually
+   played only if they say yes. Otherwise move on. Put "Learning so far" in the Pickup.
+```
+
+**Runner Guide section, Open** (full procedure, in the Start Here journal):
 
 ```text
 TEACH MODE PROCEDURE

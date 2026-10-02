@@ -14,6 +14,7 @@ Pull these out of the request, the conversation and the user's environment (an o
 | Length | "one-shot", "campaign", "a few sessions" | "one-shot" → 1 session of about 4 hours; "campaign" → 4 sessions of about 3 hours; nothing → 2–3 sessions |
 | Tone and limits | "spooky", "for kids", "grimdark", "no spiders" | Adventurous and PG-13. Name the content in the running guide so the table can adjust |
 | Mode | "teach me", "learn", "for my class", a subject name | Standard. Any learning request → Teach (see [Teach mode](teach-mode.md)) |
+| Teaching style | "sneak it in", "fun first", "for my class", "quiz me", a child's age | **Stealth** for adults, teens, solo players and friend groups. **Open** for a classroom, a parent or tutor with a child, or anyone asking to be quizzed |
 | Who runs it | "I'll DM", "AI GM", "Familiar", "solo with an oracle" | Group and they say "my players": the requester is the GM. Requester plays solo and names no GM: write for **an AI GM or a friend** (both read the same book) and add the [Foundry hand-off](foundry-handoff.md) if they play in Foundry. Connected Foundry/Familiar tools only tell you Foundry is available; they don't say who runs the game |
 | Requester plays? | "I hunt trolls", "for me to play", "solo", "my players" | **Yes** if they say *I*/*me* about the hero or it's solo; **no** if they say *my players/group* |
 | Table style | "theatre of the mind", "VTT", "minis" | Maps for key locations, usable in print and VTT |
@@ -42,7 +43,7 @@ Otherwise state your assumptions in one line and start. Example: *"Going with D&
 
 **They'll play it.** Treat everything past the back cover as a spoiler:
 
-- In chat, show only the **player pitch**: a back-cover blurb (what the hero knows at the start, the tone, the promise), and practical facts (system, level, sessions, what to bring).
+- In chat, show only the **player pitch**: a back-cover blurb (what the hero knows at the start, the tone, the promise), and practical facts (system, level, sessions, what to bring). In Stealth Teach mode the pitch sells the story and never names, defines or hints at the subject; the receipt may say what the package teaches only if the requester asked for the learning goals up front.
 - Never mention villains, twists, monster names (beyond what the pitch reveals), clue answers, puzzle solutions, endings or secret rooms. Not in chat, not in file names, not in progress updates ("Writing the betrayal scene…" is a spoiler).
 - Keep progress updates neutral: "Designing the structure", "Writing chapter 3 of 6", "Drawing maps".
 - Name the GM-only files ("`*-gm-book.pdf`, `*-found-in-play.pdf`, `book/`, `campaign.json`, `puzzles/` and the `*-gm` maps are for the GM; the handouts PDF is yours") and put the same warning in the package README.

@@ -114,12 +114,14 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
 
 **Endings:** at least three (success, partial, failure-forward).
 
-**Teach** (Teach mode only): `subject`, `level`, `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
+**Teach** (Teach mode only): `subject`, `level`, `style` (`stealth`, the default, or `open`), `lexicon[]` (Stealth: `real`, `world`, `kind` = `jargon` or `slang`, `first_node`; the checker keeps `jargon` out of everything a player reads and `slang` outside quotation marks), `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
 - `bloom`: the thinking level the objective asks for, from Bloom's taxonomy: remember, understand, apply, analyze, evaluate, create. Most adventure puzzles are *apply* or *analyze*.
 - `value` can be a number, a fraction string (`"1/3"`, compared exactly), or any other string (the script's last line must match it, ignoring case) for choices and sequences (`"left, right, middle"`).
 - `answer` is the text the GM will see, and the checker wants it **word for word** somewhere in the book (the Learning Guide's solution is the natural place).
 - `tolerance` is a **fraction** of the value (0.05 = ±5%; default 0.02). `tolerance_abs` is an absolute margin in the answer's units (0.1 = ±0.1 s). Print the same accepted range in the solution. The checker prints the range it accepts.
 - One puzzle can serve two objectives: add a beat for each objective that names the same puzzle.
+- Stealth density: the checker warns above five objectives, and when beats with a `puzzle` sit in more than 40% of the nodes (beats with only an `activity` are free). A Stealth book needs a `Decoder` heading in the Learning Guide; an Open one needs the debrief questions.
+- Stealth lexicon: list every term a player would recognise as the subject's own. `{"real": "seed phrase", "world": "the keeper's verse", "kind": "jargon", "first_node": "N2"}`; `{"real": "rug pull", "kind": "slang"}`.
 
 ## Puzzle scripts
 

@@ -54,9 +54,15 @@ Four of them are yours to play right now, with GM book, handouts, maps and VTT f
 🦉 Foundry hand-off  journal pages for Familiar's AI game master
 ```
 
+## 🐉 Rooted in D&D
+
+For D&D, adventures are written to belong in the game, not just to use its rules. Every named NPC has an ancestry and a name that sounds like it (dwarves with clan names, short blunt orcs, kobolds named for what they do), creatures act on their lore (a kobold meeting a dragon is awestruck; a copper dragon opens with a joke and sulks if you don't laugh), and stat blocks keep the SRD's own names. A reference with sources is in [`dnd-lore.md`](campaign-writer/references/dnd-lore.md).
+
 ## 🎓 Teach mode: learn by playing
 
 Ask it to teach and the subject *is* the game. You learn free fall by timing the lift that fell, fractions by keeping a magic candle from burning out, momentum by stopping a runaway ore cart. You won't answer a quiz to open a door.
+
+**The lesson can hide.** By default Teach mode runs in **Stealth** style: the world has its own words for everything, the story is about a person with a problem rather than the subject, the real jargon never appears in anything you read (the checker enforces it), and you only get the real names from an optional **decoder** you can ask for after a session. For a classroom or a parent running it for a child, ask for **Open** style and you get the reference card, the debrief and the check.
 
 <p align="center"><img src="docs/images/teach-live.webp" alt="An AI game master running a Teach-mode puzzle in Foundry" width="100%"></p>
 <p align="center"><sub>Played live in Foundry with an AI game master: predict, watch what really happens, explain, get <b>one</b> hint when stuck, and solve it yourself.</sub></p>

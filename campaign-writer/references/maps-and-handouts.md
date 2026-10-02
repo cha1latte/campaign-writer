@@ -138,7 +138,8 @@ Two folders, two PDFs:
 The checker scans `handouts/` and `pregens/` for `spoiler_terms`. Found documents may carry clues, since that's their job, but shouldn't give away more than the moment calls for. In the book, name the node that hands each one out. GM notes for a handout go in a ```` ```gm ```` box in the book or in the handout file; they're dropped from every player PDF.
 
 - Write documents in the character's voice, in a ```` ```letter ```` box or as plain paragraphs (not `>`, which is the small italic read-aloud style), and make the clue findable: plain enough that a player who reads it carefully gets it.
-- Teach mode: a **reference card** (formulas, units, a worked example in the setting's voice, a glossary) and, if wanted, a **field notebook** page with ```` ```write 6 ```` lines for predictions. One page each.
+- Teach mode, **Open style**: a **reference card** (formulas, units, a worked example in the setting's voice, a glossary) and, if wanted, a **field notebook** page with ```` ```write 6 ```` lines for predictions. One page each.
+- Teach mode, **Stealth style**: no reference card, glossary or formula sheet, and no handout that names the subject. Use in-world props: a price board, a guild ready-reckoner, an aunt's worried letter, a tutor's chalk notes. Real jargon from `teach.lexicon` stays out of every handout; the checker fails on it.
 - One handout per file; each prints on its own page. The build warns if one spills onto a second page.
 - **Signs, posters and charts:** use a ```` ```sign Title ```` box for big lettering, or a markdown table for a chart. If you draw an SVG diagram for a handout, give its text a common font (Georgia, Arial): the bundled fonts don't reach images. Printable manipulatives (fraction strips, cut-out cards, a dial) work well as tables or simple SVGs.
 

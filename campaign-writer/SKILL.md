@@ -5,7 +5,7 @@ description: Use when someone wants an original tabletop RPG adventure or campai
 
 # Campaign Writer
 
-Turn a one-line wish into the kind of adventure people buy and actually run: a GM book that works at the table, maps for print and VTT, player handouts, and numbers that hold up. In **Teach mode** the subject *is* the gameplay: players learn physics by predicting where the boulder lands, not by answering a quiz to open a door.
+Turn a one-line wish into the kind of adventure people buy and actually run: a GM book that works at the table, maps for print and VTT, player handouts, and numbers that hold up. In **Teach mode** the subject *is* the gameplay: players learn physics by predicting where the boulder lands, not by answering a quiz to open a door. By default the learning stays hidden (**Stealth**): the world has its own words, the story is about something else, and nobody feels taught.
 
 Five rules shape everything:
 
@@ -30,9 +30,10 @@ Turn the request into a brief: system, players and level, solo or group, length,
 
 1. **Pick a structure** that fits the wish ([Structures](references/structures.md)). A monster hunt is a pointcrawl with a tracking clock. A mystery is node-based. A one-shot is five scenes. A campaign is three to five linked adventures under one threat.
 2. **Find the engine.** One antagonist or force with a goal, a timeline that advances whether or not the heroes act, and a real choice at the end. Avoid stock twists (the quest-giver was the villain all along) unless the clues earn them.
-3. **Lay out** nodes, clues (three per conclusion), NPCs (want, know, hide), encounters (budgeted with [D&D 5e](references/systems/dnd5e.md), [Pathfinder 2e](references/systems/pf2e.md) or [another system](references/systems/other.md)), rewards and at least three endings. Field reference: [campaign.json](references/campaign-json.md).
-4. **Teach mode:** set two to five learning objectives, the misconception each one provokes, puzzles whose *answer comes from the concept*, three-step hint ladders, scripts that recompute every numeric answer, and the sources you checked. See [Teach mode](references/teach-mode.md).
-5. Run `python <skill>/tools/check_campaign.py campaigns/<slug> --bones`. It checks only the skeleton (reachability, clues, encounter budgets, Teach alignment, puzzle scripts). Fix every error before you write prose.
+3. **Root it in the game.** For D&D, give every named NPC an ancestry, then a name that sounds like it, and make creatures act on their lore (kobolds revere dragons; copper dragons joke and riddle). See [Rooting a D&D adventure in D&D](references/dnd-lore.md).
+4. **Lay out** nodes, clues (three per conclusion), NPCs (want, know, hide), encounters (budgeted with [D&D 5e](references/systems/dnd5e.md), [Pathfinder 2e](references/systems/pf2e.md) or [another system](references/systems/other.md)), rewards and at least three endings. Field reference: [campaign.json](references/campaign-json.md).
+5. **Teach mode:** pick the style (Stealth by default, Open for classrooms and tutors), set two to five learning objectives, the misconception each one provokes, puzzles whose *answer comes from the concept*, three-step hint ladders, scripts that recompute every numeric answer, and the sources you checked. In Stealth, also design the disguise: an analogy world rather than a rename, a story about something else, and a `lexicon` that keeps real jargon out of anything the player reads. Lessons go in no more than a third of the scenes. See [Teach mode](references/teach-mode.md).
+6. Run `python <skill>/tools/check_campaign.py campaigns/<slug> --bones`. It checks only the skeleton (reachability, clues, encounter budgets, Teach alignment, puzzle scripts). Fix every error before you write prose.
 
 ## 3. Write the book
 
@@ -82,6 +83,7 @@ If the requester is the GM, add the GM pitch (a few lines: what's really going o
 | [writing-the-book.md](references/writing-the-book.md) | Writing chapters: outline, templates, style, markdown |
 | [maps-and-handouts.md](references/maps-and-handouts.md) | Map specs, handouts, pregens |
 | [teach-mode.md](references/teach-mode.md) | Any educational request |
+| [dnd-lore.md](references/dnd-lore.md) | Any D&D adventure: species, names, creature lore, system names |
 | [systems/dnd5e.md](references/systems/dnd5e.md) | D&D 5e (2024 or 2014) |
 | [systems/pf2e.md](references/systems/pf2e.md) | Pathfinder 2e (remaster) |
 | [systems/other.md](references/systems/other.md) | Any other system |

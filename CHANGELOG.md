@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 (2026-10-02)
+
+**Teach mode no longer feels like school**
+- New **Stealth** style, now the default for adults, teens, solo players and friend groups. The world has its own words, the story is about something other than the subject, and nobody feels taught. **Open** style stays for classrooms, tutors and "quiz me".
+- A `teach.lexicon` sorts real terms into `jargon` (never in anything a player reads) and `slang` (only inside a character's quotation marks). The checker fails on jargon in handouts, pregens, found documents, read-aloud, letter/poem/sign boxes and the title and tagline.
+- The **Decoder**: an opt-in "what that was called out there", offered once per session in one line. It replaces the out-of-character debrief and the reference card in Stealth.
+- Checker: warns when puzzles sit in more than 40% of the scenes (beats where the world just reacts are free), when there are more than five objectives, and when a Stealth book has no Decoder.
+- The builder no longer prints "Teaches: ..." on the covers in Stealth.
+- Foundry hand-off: Stealth Table Rules and Runner Guide (no quiz voice, no debrief, a silent Learning Tracker), with the Open versions kept.
+
+**Rooted in D&D**
+- New reference, *Rooting a D&D adventure in D&D*: give every named NPC an ancestry and a name that sounds like it (dwarf, orc, halfling and kobold conventions, with sources), make creatures act on their lore (kobolds revere dragons, copper dragons joke and riddle), use SRD names and the edition's own terms (no half-orcs in 2024 text), and keep closed-setting proper nouns out of public packages.
+- Quality bar: new loremaster review pass and a D&D-fit score.
+
+**Unchanged:** the example packages below were built with 1.0.0 (Open-style Teach mode where it applies).
+
 ## 1.0.0 (2026-10-01)
 
 First release.

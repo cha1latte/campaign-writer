@@ -12,7 +12,8 @@ What it checks (see references/quality-bar.md for why):
   structure   ids, start node, every node reachable, every node has a heading in the book
   clues       three-clue rule for required conclusions and for nodes reached only by clues
   encounters  XP budget maths for D&D 5e (SRD 5.2.1) and Pathfinder 2e (GM Core), CR/XP and level ranges
-  teach       every objective introduced, practised and assessed; hint ladders; answers recomputed by script; sources
+  teach       every objective introduced, practised and assessed; hint ladders; answers recomputed by script; sources;
+              Stealth style: lesson density, a Decoder, and a lexicon that keeps real jargon out of player text
   spoilers    spoiler terms absent from handouts, pregens, the player pitch and player maps
   writing     placeholders, read-aloud length, stock AI phrasing, licence/attribution text
 """
@@ -346,7 +347,19 @@ def check_teach(c, root, node_ids, book_text, rep):
         rep.err("teach", "teach.subject is missing")
     objectives = t.get("objectives", [])
     obj_ids = ids_unique(objectives, "objective", rep, "teach")
-    if not 2 <= len(objectives) <= 8:
+    style = t.get("style")
+    if style not in ("stealth", "open"):
+        if style is not None:
+            rep.err("teach", f"teach.style must be 'stealth' or 'open', not {style!r}")
+        else:
+            rep.warn("teach", "teach.style isn't set; choose 'stealth' (learning hidden in play, the default) or 'open' "
+                              "(classroom, tutor, quiz me). Treating it as open")
+        style = "open"
+    stealth = style == "stealth"
+    if stealth:
+        if not 2 <= len(objectives) <= 5:
+            rep.warn("teach", f"{len(objectives)} objectives; Stealth wants 2-5 in total. More is a syllabus: cut some or save them for a sequel")
+    elif not 2 <= len(objectives) <= 8:
         rep.warn("teach", f"{len(objectives)} objectives; aim for 2-4 in a one-shot, 3-6 over a few sessions, up to 8 in a campaign")
     beats = t.get("beats", [])
     puzzles = t.get("puzzles", [])
@@ -390,6 +403,24 @@ def check_teach(c, root, node_ids, book_text, rep):
                 check_script(root, p, rep)
         if p.get("in_world_consequence") is None:
             rep.warn("teach", f"puzzle {pid}: say what happens in the fiction on a wrong answer (in_world_consequence)")
+    if stealth and node_ids:
+        # Only beats with a puzzle count: a puzzle is the part that feels like homework. Activity beats (the world
+        # reacts to what the hero does) are free.
+        lesson_nodes = {b.get("node") for b in beats if b.get("puzzle") and b.get("node") in node_ids}
+        share = len(lesson_nodes) / len(node_ids)
+        if share > 0.4 + 1e-9:
+            rep.warn("teach", f"puzzles sit in {len(lesson_nodes)} of {len(node_ids)} nodes ({share:.0%}); Stealth wants "
+                              "about a third, and warns above 40%. Turn some into activity beats (the world reacts, no "
+                              "question), fold them into scenes that already hold one, or add adventure scenes")
+        if not BONES and not re.search(r"^#{1,4}\s+.*\bdecoder\b", book_text, re.I | re.M):
+            rep.err("teach", "Stealth style needs a 'Decoder' section in the Learning Guide (what the player did, and what it's "
+                             "really called, one block per session)")
+        if not t.get("lexicon"):
+            rep.warn("teach", "Stealth style but no teach.lexicon; list the real jargon and slang so the checker can keep it "
+                              "out of what the player reads")
+    elif not stealth and not BONES and not re.search(r"^#{1,4}\s+.*\bdebrief\b", book_text, re.I | re.M):
+        rep.warn("teach", "Open style: add debrief questions to the Learning Guide")
+    check_lexicon_fields(t, node_ids, rep)
     sources = t.get("sources", [])
     covered = set()
     for s in sources:
@@ -401,6 +432,72 @@ def check_teach(c, root, node_ids, book_text, rep):
     if not kinds or all(not v for v in kinds.values()):
         return
     rep.ok("teach", f"{len(objectives)} objectives, {len(beats)} beats, {len(puzzles)} puzzles, {len(sources)} sources")
+
+
+LEX_KINDS = ("jargon", "slang")
+PLAYER_BOXES = re.compile(r"^```(?:letter|poem|sign)\b[^\n]*\n(.*?)^```", re.S | re.M)
+QUOTED = re.compile(r'"[^"\n]*"|\u201c[^\u201d]*\u201d')
+
+
+def check_lexicon_fields(t, node_ids, rep):
+    seen = set()
+    for i, e in enumerate(t.get("lexicon", [])):
+        real = (e.get("real") or "").strip()
+        if not real:
+            rep.err("teach", f"lexicon entry {i + 1} has no 'real' term")
+            continue
+        if real.lower() in seen:
+            rep.warn("teach", f"lexicon lists {real!r} twice")
+        seen.add(real.lower())
+        if e.get("kind") not in LEX_KINDS:
+            rep.err("teach", f"lexicon entry {real!r}: kind must be 'jargon' or 'slang'")
+        if e.get("first_node") and e["first_node"] not in node_ids:
+            rep.err("teach", f"lexicon entry {real!r}: first_node {e['first_node']!r} is not a node")
+
+
+def player_text_of_book(book):
+    """What a player reads inside the GM book: read-aloud (> lines) and letter, poem and sign boxes."""
+    out = {}
+    for name, text in book.items():
+        parts = [m.group(1) for m in PLAYER_BOXES.finditer(text)]
+        text = PLAYER_BOXES.sub("", text)
+        parts += [ln.strip()[1:] for ln in text.splitlines() if ln.strip().startswith(">")]
+        if parts:
+            out[name + " (read-aloud and boxed documents)"] = "\n".join(parts)
+    return out
+
+
+def check_lexicon(c, book, player_docs, found, rep):
+    t = c.get("teach") or {}
+    if t.get("style") != "stealth":
+        return
+    entries = [e for e in t.get("lexicon", []) if (e.get("real") or "").strip() and e.get("kind") in LEX_KINDS]
+    if not entries:
+        return
+    docs = {}
+    for name, text in {**player_docs, **found}.items():
+        if "decoder" in name.lower():  # the opt-in Decoder handout is the one player document allowed the real terms
+            continue
+        docs[name] = re.sub(r"```gm.*?```", "", text, flags=re.S)
+    docs.update(player_text_of_book(book))
+    docs["the title and tagline (they are printed on every cover)"] = " ".join([c.get("title", ""), c.get("tagline", "")])
+    bad = 0
+    for name, text in docs.items():
+        unquoted = QUOTED.sub(" ", text)
+        for e in entries:
+            term = e["real"].strip()
+            pat = re.compile(r"(?<![\w])" + re.escape(term) + r"(?:s|es)?(?![\w])", re.I)
+            hay = text if e["kind"] == "jargon" else unquoted
+            m = pat.search(hay)
+            if m:
+                where = "anywhere" if e["kind"] == "jargon" else "outside quotation marks"
+                fix = ("use the world's word " + repr(e["world"])) if e.get("world") else (
+                    "give it a world word in teach.lexicon and use that" if e["kind"] == "jargon"
+                    else "only a character may say it, inside quotation marks")
+                rep.err("teach", f"{name} uses the real term {term!r} ({where}); in Stealth style, {fix}")
+                bad += 1
+    if not bad:
+        rep.ok("teach", f"lexicon: {len(entries)} real terms kept out of {len(docs)} player-facing texts")
 
 
 def plain(text):
@@ -637,6 +734,8 @@ def run(root):
     if not handouts:
         rep.warn("writing", "no handouts/; published adventures ship at least a player pitch or one handout")
     check_spoilers(c, root, player_docs, rep)
+    if c.get("mode") == "teach":
+        check_lexicon(c, book, player_docs, found, rep)
     all_docs = dict(book)
     all_docs.update(player_docs)
     all_docs.update(found)  # found-in-play documents: placeholder and phrasing checks, not spoiler checks
