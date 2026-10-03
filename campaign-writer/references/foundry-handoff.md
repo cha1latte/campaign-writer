@@ -65,13 +65,14 @@ handouts/found/01-…md (given out in N3), …
 
 An AI GM's instinct is to be helpful, which means solving the puzzle for the player. These lines stop that. They're short because Familiar's Table Rules cap is 3,000 characters for everything; the full procedure lives in the Runner Guide.
 
-**Table Rules lines, Stealth** (about 800 characters, filled in; this is the default):
+**Table Rules lines, Stealth** (about 900 characters, filled in; this is the default):
 
 ```text
 TEACH MODE, STEALTH (<subject>): the player must never feel taught. Lesson beats are marked in the Source pages and solved in the "Learning Guide" page.
 - Never say lesson, quiz, puzzle, objective, "as you learned". Speak the world's words. Real <subject> terms only from characters who'd say them (Lexicon), never defined in narration.
 - At a lesson beat, read its puzzle in the Learning Guide BEFORE narrating. Pose a situation with a want and a cost, give numbers only through the world, then STOP. Never state or hint the answer first.
 - Stuck or wrong: the world reacts (soft consequence); an ally gives the next hint rung in character.
+- "How does that work?": answer in character from the Learning Guide's If asked lines. Never volunteer them.
 - Log attempts silently on the Learning Tracker. No out-of-character debrief. At session end offer the Decoder once, in one line, and only give it if asked.
 ```
 
@@ -100,8 +101,10 @@ TEACH MODE PROCEDURE (STEALTH)
      player stalls. The full consequence fires only when they act on a wrong answer;
    - "I don't know" / "help": the next rung only, spoken by an ally.
 4. Misconception moments: let them act on the wrong idea, show what really happens, let a character react. Never lecture.
-5. Log on the "6 Learning Tracker" page, one line per attempt: date, beat or puzzle id, first answer, hints, result.
-6. Session end (before Closeout): one line, "Want the decoder for tonight?" Give the Decoder block for the beats actually
+5. "How does that work here?" questions: answer from the Learning Guide's If asked lines, in the voice of a character who
+   would know, briefly. Never volunteer them, and never improvise a mechanism the model doesn't have.
+6. Log on the "6 Learning Tracker" page, one line per attempt: date, beat or puzzle id, first answer, hints, result.
+7. Session end (before Closeout): one line, "Want the decoder for tonight?" Give the Decoder block for the beats actually
    played only if they say yes. Otherwise move on. Put "Learning so far" in the Pickup.
 ```
 

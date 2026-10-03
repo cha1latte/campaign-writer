@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0 (2026-10-03)
+
+**Teach mode: the costume can't break the lesson**
+- New **allegory audit**, run after drafting and before the build. Write a short model of each mapping (what the real thing is, where it lives, who can change it, how it moves or is authorised), then walk every scene, prop, handout, puzzle and ending against it. A new reference names six ways a disguise quietly teaches the wrong thing (abstract things turned into props, two real roles run by one institution, puzzle givens the backstory couldn't produce, no answer to "how does that work here?", plot-convenient delays, unflagged simplifications), with a rule and an example for each.
+- `teach.model` in campaign.json. The checker requires it in Stealth, checks its fields, warns when two real roles share one in-world owner, and keeps real jargon out of the in-character *If asked* lines.
+- The Learning Guide gains *If asked* (answers for a curious player, never volunteered) and the Decoder ends with *Where the story bends*.
+- Quality bar pass "the curious player"; Foundry Table Rules and Runner Guide tell the AI GM to answer "how does that work?" from the If asked lines.
+- The audit's findings go in an `allegory-audit.md` log in the package (the checker warns when it's missing), and `--bones` accepts a sketch of the model.
+- One rule for puzzle scripts: they recompute the answer from what the backstory says happened, so a handout number the backstory couldn't produce shows up as a mismatch.
+- Lesson density says the same thing everywhere: puzzles in no more than about a third of the scenes; activity beats are free. `--bones` no longer warns that puzzle answers are missing from a book that isn't written yet.
+- Tested with a cold build of a new Stealth one-shot (how the internet works): the walk found 26 problems the checker couldn't see, and the friction it hit shaped the points above.
+- Stealth packages made with 1.1.0 need a `teach.model` to pass the checker.
+
 ## 1.1.0 (2026-10-02)
 
 **Teach mode no longer feels like school**

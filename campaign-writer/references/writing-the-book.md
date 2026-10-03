@@ -15,7 +15,7 @@ One file per chapter in `book/`, numbered so they sort. Use this order and drop 
 | next | **Rewards, advancement and endings**: treasure table, milestones, the three endings, what's next |
 | campaigns | **Between adventures** after each adventure's chapter: what changed, what the villain does next, downtime, levelling |
 | next | **Appendix**: random tables (encounters, rumours, names, weather), a timeline or clock tracker, quick-reference sheet |
-| Teach mode | **Learning guide**: objectives, where each is taught, practised and assessed; worked solutions; hint ladders; misconceptions to watch for; the lexicon; Stealth: the Decoder, Open: debrief questions; sources |
+| Teach mode | **Learning guide**: objectives, where each is taught, practised and assessed; worked solutions; hint ladders; misconceptions to watch for; the lexicon; *If asked* lines; Stealth: the Decoder (ending with *Where the story bends*), Open: debrief questions; sources |
 | last | **Credits and licence**: author line, tools, licence and attribution text (verbatim from the system file), and the font credit: *Set in Alegreya, Alegreya SC and Alegreya Sans by Huerta Tipográfica (SIL Open Font License 1.1).* |
 
 ## The node template

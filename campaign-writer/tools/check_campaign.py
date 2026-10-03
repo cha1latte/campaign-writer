@@ -13,7 +13,8 @@ What it checks (see references/quality-bar.md for why):
   clues       three-clue rule for required conclusions and for nodes reached only by clues
   encounters  XP budget maths for D&D 5e (SRD 5.2.1) and Pathfinder 2e (GM Core), CR/XP and level ranges
   teach       every objective introduced, practised and assessed; hint ladders; answers recomputed by script; sources;
-              Stealth style: lesson density, a Decoder, and a lexicon that keeps real jargon out of player text
+              Stealth style: lesson density, a Decoder, and a lexicon that keeps real jargon out of player text;
+              a teach.model for the allegory audit (fields only: whether the story obeys it is a reading job)
   spoilers    spoiler terms absent from handouts, pregens, the player pitch and player maps
   writing     placeholders, read-aloud length, stock AI phrasing, licence/attribution text
 """
@@ -394,7 +395,7 @@ def check_teach(c, root, node_ids, book_text, rep):
             rep.err("teach", f"puzzle {pid} has {len(hints)} hints; write a three-step hint ladder")
         if not p.get("answer"):
             rep.err("teach", f"puzzle {pid} has no answer")
-        elif plain(p["answer"]) not in plain(book_text):
+        elif not BONES and plain(p["answer"]) not in plain(book_text):
             rep.warn("teach", f"puzzle {pid}: answer {p['answer']!r} doesn't appear word for word in the book (GM can't check it)")
         if "value" in p:
             if not p.get("script"):
@@ -421,6 +422,7 @@ def check_teach(c, root, node_ids, book_text, rep):
     elif not stealth and not BONES and not re.search(r"^#{1,4}\s+.*\bdebrief\b", book_text, re.I | re.M):
         rep.warn("teach", "Open style: add debrief questions to the Learning Guide")
     check_lexicon_fields(t, node_ids, rep)
+    check_model(t, stealth, root, book_text, rep)
     sources = t.get("sources", [])
     covered = set()
     for s in sources:
@@ -455,6 +457,63 @@ def check_lexicon_fields(t, node_ids, rep):
             rep.err("teach", f"lexicon entry {real!r}: first_node {e['first_node']!r} is not a node")
 
 
+MODEL_FIELDS = ("real", "world", "is", "lives", "changed_by", "moves")
+
+
+def check_model(t, stealth, root, book_text, rep):
+    """teach.model is the allegory audit's input. Only its shape is checked; whether the story obeys it is a reading job."""
+    model = t.get("model")
+    if not model:
+        if stealth:
+            rep.err("teach", "Stealth style needs teach.model: one entry per real thing or role the world stands in for "
+                             "(is, lives, changed_by, moves). Write it, then walk the package against it "
+                             "(references/teach-allegory-audit.md)")
+        elif any((e.get("world") or "").strip() for e in t.get("lexicon", [])):
+            rep.warn("teach", "the lexicon gives the world its own words but there's no teach.model; an analogy world "
+                              "needs the allegory audit (references/teach-allegory-audit.md)")
+        return
+    if not isinstance(model, list):
+        rep.err("teach", "teach.model must be a list of entries")
+        return
+    owners, book_plain, broken = {}, plain(book_text), False
+    for i, e in enumerate(model):
+        if not isinstance(e, dict):
+            rep.err("teach", f"teach.model entry {i + 1} must be an object with real, world, is, lives, changed_by, moves")
+            broken = True
+            continue
+        name = (e.get("real") or "").strip() or f"entry {i + 1}"
+        missing = [k for k in MODEL_FIELDS if not str(e.get(k) or "").strip()]
+        if missing and BONES:
+            rep.warn("teach", f"teach.model {name!r} is missing {', '.join(missing)} (fine in a sketch; required before the build)")
+        elif missing:
+            rep.err("teach", f"teach.model {name!r} is missing {', '.join(missing)}")
+            broken = True
+        world = (e.get("world") or "").strip().lower()
+        if world:
+            owners.setdefault(world, []).append(name)
+        asked = e.get("if_asked") or []
+        asked = [asked] if isinstance(asked, str) else asked
+        if not asked:
+            rep.warn("teach", f"teach.model {name!r} has no if_asked line; write what a character says when a player "
+                              "asks how it works")
+        elif not BONES:
+            for line in map(str, asked):
+                if plain(line) not in book_plain:
+                    rep.warn("teach", f"teach.model {name!r}: if_asked line isn't in the book word for word (the GM "
+                                      f"can't find it): {line[:60]!r}")
+    for world, reals in owners.items():
+        if len(reals) > 1:
+            rep.warn("teach", f"teach.model gives {' and '.join(repr(r) for r in reals)} the same owner {world!r}; map "
+                              "each real role to its own owner, or say in the Decoder why they share one")
+    if stealth and not BONES and not (Path(root) / "allegory-audit.md").is_file():
+        rep.warn("teach", "no allegory-audit.md in the package root; log the allegory audit's findings there "
+                          "(references/teach-allegory-audit.md)")
+    if stealth and not BONES and not re.search(r"where the story bends", book_text, re.I):
+        rep.warn("teach", "the Decoder has no 'Where the story bends' block naming the story's deliberate simplifications")
+    if not broken:
+        rep.ok("teach", f"model: {len(model)} mappings (the allegory audit itself is a reading job)")
+
+
 def player_text_of_book(book):
     """What a player reads inside the GM book: read-aloud (> lines) and letter, poem and sign boxes."""
     out = {}
@@ -481,6 +540,10 @@ def check_lexicon(c, book, player_docs, found, rep):
         docs[name] = re.sub(r"```gm.*?```", "", text, flags=re.S)
     docs.update(player_text_of_book(book))
     docs["the title and tagline (they are printed on every cover)"] = " ".join([c.get("title", ""), c.get("tagline", "")])
+    asked = [a for e in t.get("model") or [] if isinstance(e, dict)
+             for a in ([e.get("if_asked")] if isinstance(e.get("if_asked"), str) else e.get("if_asked") or [])]
+    if asked:
+        docs["teach.model if_asked lines (a character says them to the player)"] = "\n".join(map(str, asked))
     bad = 0
     for name, text in docs.items():
         unquoted = QUOTED.sub(" ", text)

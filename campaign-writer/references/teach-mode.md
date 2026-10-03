@@ -96,6 +96,7 @@ Keep the magic out of the concept's way. A world where magic changes how gravity
 3. **Spread the givens through the world.** A number the puzzle needs is on a board, in an overheard grumble, in a ledger the player has to ask to see. Not on a card handed over with the question. Don't announce a puzzle; pose a situation with a want and a cost.
 4. **Allies give hints, in character.** The hint ladder is spoken by the companion or a mentor in their own voice, one rung at a time ("Is that the whole price, though?"), never as a line marked *Hint*.
 5. **No reference card or glossary in the player's pre-play handouts.** Use in-world props instead: a price board, a ready-reckoner stamped with the guild's seal, a tutor's chalk notes. The pitch sells the story, the stakes and the tone. It doesn't define or even name the subject.
+6. **Model it before you dress it.** Write `teach.model`: for each real thing or role, what it is, where it lives, who can change it and how it moves. Then keep every prop, institution and timing inside that model. A disguise that hides the subject but breaks its mechanism teaches the wrong thing (an abstract thing turned into a prop, two real roles run by one guild, a convenient grace period). After drafting, run the [allegory audit](teach-allegory-audit.md).
 
 ### Vocabulary: earn the real word
 
@@ -117,7 +118,7 @@ Write it in `teach.puzzles` and in the book:
 
 - **The situation in the world's words**, with every given number printed *somewhere the player can find it in the fiction* (a sign, an NPC's line, an item). In Open style a reference card is fine. In Stealth, scatter the givens (see 3b) and make sure none is only discoverable by luck. Units always. Givens that are *clues* go in `handouts/found/`, never in the player's own handouts.
 - **The answer** exactly as the GM will see it, with units and an acceptable range (`tolerance`). Accept equivalent reasoning, not just one method.
-- **A script** (`puzzles/pN_name.py`) that recomputes numeric answers from the printed givens. The checker runs it.
+- **A script** (`puzzles/pN_name.py`) that recomputes numeric answers from what the backstory says happened, then check that every printed given matches its numbers (see the [allegory audit](teach-allegory-audit.md), class 3). The checker runs it.
 - **A three-rung hint ladder**: (1) a nudge to what matters ("what do you know about the bell?"), (2) the strategy ("which equation links distance and time from rest?"), (3) a worked step that still leaves the last step to them. A hint costs a little in the fiction (time, noise) or a roll can buy it. In Stealth, write each rung as a line an ally would say.
 - **What happens in the fiction** on a right answer and on a wrong one (`in_world_consequence`), and how they can try again. Write it in two steps: a **soft** consequence for a first wrong answer (someone reacts, time passes, a small cost) followed by a retry, and the **full** consequence only when the player *acts on* a wrong answer (they sign the report, pull the lever, throw the float). Say so in the puzzle text, so a GM knows which one fires.
 - **Common wrong answers**, each with a diagnostic question ("what unit does *g* × *t* come out in?"). These nudges point at the slip; they don't count as hint rungs and never contain the answer.
@@ -155,10 +156,15 @@ Question, givens, worked solution, accepted range, hint ladder, common wrong ans
 ## Lexicon
 Every real term, the world's word for it, and where it may appear (see *Vocabulary*).
 
+## If asked
+For each core mechanism, the one to three in-character lines that answer "how does that work here?" (from `teach.model[].if_asked`). Answers only when a player asks; never volunteered.
+
 ## Debrief questions (Open style)
 ## Before and after check (Open style, optional)
 ## Decoder (Stealth style)
 One short block per session: what the player did, what it is really called, in a friendly voice.
+### Where the story bends
+One line per deliberate simplification: what the story does, and what is really true.
 ## Sources
 ```
 
@@ -171,6 +177,7 @@ Put a short `lesson` box in the node itself wherever a beat happens, pointing to
 - Re-read each puzzle as a student: are all the givens printed? Is the question unambiguous? Could a correct but different method give a different answer? (Then widen the tolerance or tighten the question.)
 - State simplifications out loud ("ignore air resistance", "treat the rope as massless") in the puzzle text and the reference card. In Stealth, say them in the world ("the tally-house rounds to the nearest whole mark") and put the real simplification in the Learning Guide.
 - Run the **friend, rename and glossary tests** from principle 8 on the finished pitch, handouts and read-aloud. Re-read them *as the player who was never told the subject*.
+- Run the **[allegory audit](teach-allegory-audit.md)**: walk every scene, prop, handout, puzzle and ending against `teach.model`. The subject can be taught right in the puzzles and wrong in the scenery.
 
 ## For a parent or tutor
 

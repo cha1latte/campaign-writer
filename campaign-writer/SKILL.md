@@ -20,7 +20,7 @@ Five rules shape everything:
 - The tools need **Python 3.9+** (standard library only). PDFs and PNG maps also need Chrome, Edge, Chromium or Brave. Check with `python <skill>/tools/browser.py`. Without a browser you still get HTML and SVG; say so in the hand-over.
 - To *look* at the PDFs you need page images. If your file reader can't show PDFs, install a renderer once (`pip install pypdfium2 pillow`) and use `tools/preview_pdf.py`. If you can't install anything, say the pages weren't inspected.
 - Write the package to `campaigns/<slug>/` in the working directory unless the user names a place. If that folder exists, read it first: you may be continuing someone's work.
-- Long job? Work in this order and save as you go: `campaign.json` → checker → chapters → maps → handouts → build → look → fix.
+- Long job? Work in this order and save as you go: `campaign.json` → checker → chapters → maps → handouts → allegory audit (Teach) → build → look → fix.
 
 ## 1. Read the wish
 
@@ -32,7 +32,7 @@ Turn the request into a brief: system, players and level, solo or group, length,
 2. **Find the engine.** One antagonist or force with a goal, a timeline that advances whether or not the heroes act, and a real choice at the end. Avoid stock twists (the quest-giver was the villain all along) unless the clues earn them.
 3. **Root it in the game.** For D&D, give every named NPC an ancestry, then a name that sounds like it, and make creatures act on their lore (kobolds revere dragons; copper dragons joke and riddle). See [Rooting a D&D adventure in D&D](references/dnd-lore.md).
 4. **Lay out** nodes, clues (three per conclusion), NPCs (want, know, hide), encounters (budgeted with [D&D 5e](references/systems/dnd5e.md), [Pathfinder 2e](references/systems/pf2e.md) or [another system](references/systems/other.md)), rewards and at least three endings. Field reference: [campaign.json](references/campaign-json.md).
-5. **Teach mode:** pick the style (Stealth by default, Open for classrooms and tutors), set two to five learning objectives, the misconception each one provokes, puzzles whose *answer comes from the concept*, three-step hint ladders, scripts that recompute every numeric answer, and the sources you checked. In Stealth, also design the disguise: an analogy world rather than a rename, a story about something else, and a `lexicon` that keeps real jargon out of anything the player reads. Lessons go in no more than a third of the scenes. See [Teach mode](references/teach-mode.md).
+5. **Teach mode:** pick the style (Stealth by default, Open for classrooms and tutors), set two to five learning objectives, the misconception each one provokes, puzzles whose *answer comes from the concept*, three-step hint ladders, scripts that recompute every numeric answer, and the sources you checked. In Stealth, also design the disguise: an analogy world rather than a rename, a story about something else, and a `lexicon` that keeps real jargon out of anything the player reads. Puzzles go in no more than about a third of the scenes (activity beats, where the world just reacts, are free). Write `teach.model` now too: for each real thing or role the world stands in for, what it is, where it lives, who can change it and how it moves (the checker requires it in Stealth; step 5 uses it). See [Teach mode](references/teach-mode.md).
 6. Run `python <skill>/tools/check_campaign.py campaigns/<slug> --bones`. It checks only the skeleton (reachability, clues, encounter budgets, Teach alignment, puzzle scripts). Fix every error before you write prose.
 
 ## 3. Write the book
@@ -47,7 +47,17 @@ Write like a good published module, not like a chatbot: concrete nouns, short re
 - **Handouts**: `handouts/` holds what players may read **before** play (the pitch, reference cards, the player travel map). `handouts/found/` holds in-world clue documents (letters, ledgers, notices) that the GM hands over when they're found. They build into separate PDFs, so a player who opens their own PDF early spoils nothing.
 - **Pregens** (`pregens/`): ready-to-play characters with a hook into this adventure, for one-shots and whenever the user has no character yet. Build them by the system's own rules.
 
-## 5. Build, check and look
+## 5. Teach mode: audit the allegory
+
+After the chapters, handouts, pregens and maps are drafted and before the build, whenever the world stands in for the subject (always in Stealth). The checker keeps real words out; it can't see the scenery breaking the real mechanism: energy sold in jars, one guild doing two real jobs, a handout whose numbers the backstory couldn't produce. Players learn from the props as much as from the puzzles.
+
+1. **Finish the model.** Each `teach.model` entry says what the real thing **is**, where it **lives**, who **can change it** and how it **moves or is authorised**, with in-character *if asked* lines and any deliberate simplification.
+2. **Walk the package against it:** every scene, NPC job, prop, handout, found document, pregen, puzzle and ending. Fix contradictions in the story itself, not in a footnote, and log each one in `allegory-audit.md` in the package root.
+3. **Write it up:** the *If asked* lines go in the Learning Guide (answers when a player asks, never volunteered) and a *Where the story bends* block ends the Decoder.
+
+The six failure classes, their rules and an example of each: [Teach-mode allegory audit](references/teach-allegory-audit.md).
+
+## 6. Build, check and look
 
 ```text
 python <skill>/tools/check_campaign.py campaigns/<slug>      # must end with 0 errors
@@ -56,14 +66,14 @@ python <skill>/tools/build_book.py campaigns/<slug>          # GM book + handout
 
 The build also re-renders every map (SVG and PNG) and warns about unrendered markdown and handouts that spill onto a second page. Then **look**: `python <skill>/tools/preview_pdf.py build/<slug>-gm-book.pdf` makes contact sheets (6 pages each) and `--pages 5,9` renders single pages up close. Look at every contact sheet (handout PDFs are skipped for gaps: their pages are short by design), a few pages at full size, every map PNG in `build/maps/`, and the handouts. The preview also prints `GAP` lines for pages where a column stops early; check each one (a chapter's last page is fine). Fix overflow, gaps, collisions and anything a reader would trip on. Then run the review passes and the score sheet in [Quality bar](references/quality-bar.md), and fix any part scoring under 8.
 
-## 6. Hand over
+## 7. Hand over
 
 Write `README.md` in the package (what's inside, how to run it, licence). Then give the user a short receipt in chat:
 
 ```text
 Ready:     <title>, <system>, <players/level>, <sessions>; start by reading <file/section>
 Package:   GM book (N pages), handouts (N pages), N maps (GM/player/VTT), N pregens
-Verified:  checker 0 errors / N warnings kept (why); PDFs built and inspected; maps inspected
+Verified:  checker 0 errors / N warnings kept (why); PDFs built and inspected; maps inspected; Teach: allegory audit, N fixes
 Scores:    the quality-bar parts out of 10 (also in the README)
 Not done:  anything skipped or unverified
 Next:      the one next step (e.g. "install in Foundry with foundry-familiar-campaigns")
@@ -83,6 +93,7 @@ If the requester is the GM, add the GM pitch (a few lines: what's really going o
 | [writing-the-book.md](references/writing-the-book.md) | Writing chapters: outline, templates, style, markdown |
 | [maps-and-handouts.md](references/maps-and-handouts.md) | Map specs, handouts, pregens |
 | [teach-mode.md](references/teach-mode.md) | Any educational request |
+| [teach-allegory-audit.md](references/teach-allegory-audit.md) | Teach mode, after drafting: the model, the walk, six failure classes |
 | [dnd-lore.md](references/dnd-lore.md) | Any D&D adventure: species, names, creature lore, system names |
 | [systems/dnd5e.md](references/systems/dnd5e.md) | D&D 5e (2024 or 2014) |
 | [systems/pf2e.md](references/systems/pf2e.md) | Pathfinder 2e (remaster) |

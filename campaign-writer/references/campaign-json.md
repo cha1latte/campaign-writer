@@ -114,7 +114,7 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
 
 **Endings:** at least three (success, partial, failure-forward).
 
-**Teach** (Teach mode only): `subject`, `level`, `style` (`stealth`, the default, or `open`), `lexicon[]` (Stealth: `real`, `world`, `kind` = `jargon` or `slang`, `first_node`; the checker keeps `jargon` out of everything a player reads and `slang` outside quotation marks), `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
+**Teach** (Teach mode only): `subject`, `level`, `style` (`stealth`, the default, or `open`), `lexicon[]` (Stealth: `real`, `world`, `kind` = `jargon` or `slang`, `first_node`; the checker keeps `jargon` out of everything a player reads and `slang` outside quotation marks), `model[]` (required in Stealth: `real`, `world`, `is`, `lives`, `changed_by`, `moves`, plus `if_asked` lines and an optional `bends`; one entry per real thing or role the world stands in for, see [allegory audit](teach-allegory-audit.md)), `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
 - `bloom`: the thinking level the objective asks for, from Bloom's taxonomy: remember, understand, apply, analyze, evaluate, create. Most adventure puzzles are *apply* or *analyze*.
 - `value` can be a number, a fraction string (`"1/3"`, compared exactly), or any other string (the script's last line must match it, ignoring case) for choices and sequences (`"left, right, middle"`).
 - `answer` is the text the GM will see, and the checker wants it **word for word** somewhere in the book (the Learning Guide's solution is the natural place).
@@ -125,7 +125,7 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
 
 ## Puzzle scripts
 
-Every numeric answer gets a tiny script in `puzzles/` that recomputes it from the numbers printed in the puzzle. The last line of output must start with the answer. The checker runs it and compares it with `value`.
+Every numeric answer gets a tiny script in `puzzles/` that recomputes it from the situation the backstory sets up (the same numbers the player will find printed in the world), so a given the backstory couldn't produce shows up as a mismatch. The last line of output must start with the answer. The checker runs it and compares it with `value`.
 
 ```python
 # puzzles/p1_fall_time.py: bell dropped from the 20 m gallery
