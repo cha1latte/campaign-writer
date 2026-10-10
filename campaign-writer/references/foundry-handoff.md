@@ -70,6 +70,7 @@ An AI GM's instinct is to be helpful, which means solving the puzzle for the pla
 ```text
 TEACH MODE, STEALTH (<subject>): the player must never feel taught. Lesson beats are marked in the Source pages and solved in the "Learning Guide" page.
 - Never say lesson, quiz, puzzle, objective, "as you learned". Speak the world's words. Real <subject> terms only from characters who'd say them (Lexicon), never defined in narration.
+- New world words one at a time, in word-ladder order (Learning Guide): the first time one lands, the speaker glosses it in plain words in the same breath, then add it to the players' word list. Plain English for anything not introduced yet. Asked "what does X mean?": one plain line, in character.
 - At a lesson beat, read its puzzle in the Learning Guide BEFORE narrating. Pose a situation with a want and a cost, give numbers only through the world, then STOP. Never state or hint the answer first.
 - Stuck or wrong: the world reacts (soft consequence); an ally gives the next hint rung in character.
 - "How does that work?": answer in character from the Learning Guide's If asked lines. Never volunteer them.
@@ -94,7 +95,9 @@ TEACH MODE PROCEDURE (STEALTH)
    in-world consequence) and the Lexicon.
 2. Narrate in the world's words. Give the numbers through things the hero can see, hear or ask about, not as a list.
    Never write "hint:", never announce a challenge. A real <subject> term appears only in the mouth of a character the
-   Lexicon allows, as slang, and is never explained by the narrator.
+   Lexicon allows, as slang, and is never explained by the narrator. World words are different: follow the word
+   ladder, one new word per beat, glossed by whoever says it the first time, and append it to the players' word list
+   page (a character's chalked list). Book speeches are a guide, not a script: drop words that aren't introduced yet.
 3. When the player acts or answers:
    - inside the range: show it working in the fiction. If a character would want to know why, let them ask in character;
    - outside it: the soft consequence fires, an ally (in character) offers the next hint rung when asked or when the

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0 (2026-10-10)
+
+**Teach mode: onboard, don't flood**
+- New principle: an invented world is its own jargon. The heroes are newcomers, and locals explain their own words to newcomers, in half a breath and in their own voice. A friendly gloss of the *world's* word is fine; a definition of the *real* term still isn't.
+- New **word ladder**, `teach.words` in campaign.json: every world word a player has to learn (money words and setting names), with a plain `gloss` and the node where it first lands. At most three new words per node, fewer in the opening scene, and named characters introduced one or two at a time instead of as a roll-call.
+- Checker: warns when a node introduces more than three new world words, when a word has no gloss, and when lexicon world words aren't on the ladder. Stealth packages without a ladder get a warning, not an error.
+- New **newcomer test** in the accuracy pass and the quality bar: read the opening aloud as someone who's never seen the setting and count what they'd have to ask about.
+- Players may get one in-world word list that starts empty and grows as they meet words (a list chalked inside a cupboard door), never a pre-play glossary.
+- Foundry hand-off: the AI GM's Table Rules and Runner Guide introduce world words in ladder order, glossed on first use, and answer "what does X mean?" in one plain line.
+- Found in live play: an opening scene with ten new words and seven characters read as "a lot of jargon, intimidating to get started".
+
 ## 1.2.0 (2026-10-03)
 
 **Teach mode: the costume can't break the lesson**

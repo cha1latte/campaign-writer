@@ -422,6 +422,7 @@ def check_teach(c, root, node_ids, book_text, rep):
     elif not stealth and not BONES and not re.search(r"^#{1,4}\s+.*\bdebrief\b", book_text, re.I | re.M):
         rep.warn("teach", "Open style: add debrief questions to the Learning Guide")
     check_lexicon_fields(t, node_ids, rep)
+    check_word_ladder(c, t, stealth, node_ids, rep)
     check_model(t, stealth, root, book_text, rep)
     sources = t.get("sources", [])
     covered = set()
@@ -455,6 +456,48 @@ def check_lexicon_fields(t, node_ids, rep):
             rep.err("teach", f"lexicon entry {real!r}: kind must be 'jargon' or 'slang'")
         if e.get("first_node") and e["first_node"] not in node_ids:
             rep.err("teach", f"lexicon entry {real!r}: first_node {e['first_node']!r} is not a node")
+
+
+WORDS_PER_NODE = 3
+
+
+def check_word_ladder(c, t, stealth, node_ids, rep):
+    """teach.words: the world's own words, glossed and paced so the opening doesn't flood a newcomer."""
+    words = t.get("words")
+    if not words:
+        if stealth and any((e.get("world") or "").strip() for e in t.get("lexicon", [])):
+            rep.warn("teach", "Stealth style but no teach.words; list every world word a player must learn (lexicon world "
+                              "words and setting nouns) with a plain gloss and first_node, at most "
+                              f"{WORDS_PER_NODE} new per node (references/teach-mode.md, principle 10)")
+        return
+    per_node, seen = {}, set()
+    for i, w in enumerate(words):
+        word = (w.get("word") or "").strip()
+        if not word:
+            rep.err("teach", f"words entry {i + 1} has no 'word'")
+            continue
+        seen.add(word.lower())
+        if not (w.get("gloss") or "").strip():
+            rep.warn("teach", f"word {word!r}: no gloss; write the plain half-sentence a local says the first time")
+        node = w.get("first_node")
+        if not node:
+            rep.warn("teach", f"word {word!r}: no first_node")
+        elif node_ids and node not in node_ids:
+            rep.err("teach", f"word {word!r}: first_node {node!r} is not a node")
+        else:
+            per_node.setdefault(node, []).append(word)
+    opening = (c.get("nodes") or [{}])[0].get("id")
+    for node, ws in per_node.items():
+        if len(ws) > WORDS_PER_NODE:
+            where = "the opening scene" if node == opening else f"node {node}"
+            rep.warn("teach", f"{where} introduces {len(ws)} new world words ({', '.join(ws)}); keep it to "
+                              f"{WORDS_PER_NODE} and say the rest in plain English until later nodes")
+    missing = sorted({ww for e in t.get("lexicon", []) for ww in [(e.get("world") or "").strip()]
+                      if ww and ww.lower() not in seen and not ww.startswith("(")})
+    if missing:
+        rep.warn("teach", f"{len(missing)} lexicon world words are not on the word ladder (teach.words): "
+                          + ", ".join(missing[:8]) + (" ..." if len(missing) > 8 else ""))
+    rep.ok("teach", f"word ladder: {len(words)} words over {len(per_node)} nodes")
 
 
 MODEL_FIELDS = ("real", "world", "is", "lives", "changed_by", "moves")
