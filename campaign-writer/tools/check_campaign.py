@@ -380,6 +380,7 @@ def check_teach(c, root, node_ids, book_text, rep):
             rep.warn("teach", f"beat {b.get('id')} ({b.get('kind')}) has no puzzle or activity; practice and assessment "
                               "should be something the player does (add \"puzzle\" or describe it in \"activity\")")
         kinds[b["objective"]].add(b.get("kind"))
+    check_teach_before_test(beats, rep)
     for o in objectives:
         missing = {"introduce", "practice", "assess"} - kinds.get(o.get("id"), set())
         if missing:
@@ -440,6 +441,22 @@ def check_teach(c, root, node_ids, book_text, rep):
 LEX_KINDS = ("jargon", "slang")
 PLAYER_BOXES = re.compile(r"^```(?:letter|poem|sign)\b[^\n]*\n(.*?)^```", re.S | re.M)
 QUOTED = re.compile(r'"[^"\n]*"|\u201c[^\u201d]*\u201d')
+
+
+def check_teach_before_test(beats, rep):
+    """The first meeting with an idea is a no-stakes showing, never the test (references/teach-mode.md, principle 3).
+    Show-then-try inside one node is fine; a puzzle on the introduce beat, or no showing written down, is not."""
+    for b in beats:
+        if b.get("kind") != "introduce":
+            continue
+        bid, obj = b.get("id"), b.get("objective")
+        if b.get("puzzle"):
+            rep.err("teach", f"beat {bid} introduces {obj} with puzzle {b['puzzle']}; the first meeting with an idea "
+                             "is never the test. Show it working first with nothing at stake, then make the puzzle a "
+                             "practice beat after it")
+        if not str(b.get("shows", "")).strip():
+            rep.warn("teach", f"beat {bid} ({obj}): add \"shows\": who shows the idea working, how, with nothing "
+                              "at stake. A bet or choice that commits the players is a test, not an introduction")
 
 
 def check_lexicon_fields(t, node_ids, rep):

@@ -75,6 +75,7 @@ TEACH MODE, STEALTH (<subject>): the player must never feel taught. Lesson beats
 - Stuck or wrong: the world reacts (soft consequence); an ally gives the next hint rung in character.
 - "How does that work?": answer in character from the Learning Guide's If asked lines. Never volunteer them.
 - Log attempts silently on the Learning Tracker. No out-of-character debrief. At session end offer the Decoder once, in one line, and only give it if asked.
+- Players say they weren't taught something: fix it IN the fiction (a character shows the idea with no stakes), never explain it out of character. If a loss came from missing givens, undo it in-world for a reason that fits a character.
 ```
 
 **Table Rules lines, Open** (about 600 characters, filled in; classrooms, tutors, "quiz me"):
@@ -93,11 +94,15 @@ TEACH MODE (<subject>): lesson beats are marked in the Source pages and solved i
 TEACH MODE PROCEDURE (STEALTH)
 1. Before a lesson beat: get-journal-page on the Learning Guide; find the puzzle (givens, answer range, hint ladder,
    in-world consequence) and the Lexicon.
-2. Narrate in the world's words. Give the numbers through things the hero can see, hear or ask about, not as a list.
+2. Narrate in the world's words. Give the numbers through things the hero can see or hear, not as a list, and make sure
+   every given has been said in play before the players must commit (a fact they can't know to ask for, like the
+   world's calendar, is never left to "if asked").
    Never write "hint:", never announce a challenge. A real <subject> term appears only in the mouth of a character the
    Lexicon allows, as slang, and is never explained by the narrator. World words are different: follow the word
    ladder, one new word per beat, glossed by whoever says it the first time, and append it to the players' word list
    page (a character's chalked list). Book speeches are a guide, not a script: drop words that aren't introduced yet.
+   Talk like people: one or two sentences a line, answer what was asked, catchphrases once or twice a scene. In voiced
+   lines only the spoken words go inside the quote; actions go in narration (the voice reads everything in the quote).
 3. When the player acts or answers:
    - inside the range: show it working in the fiction. If a character would want to know why, let them ask in character;
    - outside it: the soft consequence fires, an ally (in character) offers the next hint rung when asked or when the
@@ -151,6 +156,8 @@ Status: LO1 practised 1/2, assessed no; LO2 not yet met
 - VTT images are `build/maps/<id>-vtt.png`: exactly `cols × foundry_px` by `rows × foundry_px` pixels. Foundry needs them under its own **Data** folder (for example `Data/campaign-writer/<slug>/`), not a local path elsewhere. Tell the installing assistant or the GM to copy `build/maps/*-vtt.png` there.
 - Walls are in `build/maps/<id>-walls.json`, in image pixels, already in the shape Familiar's `create-walls` takes: `c` is `[x1, y1, x2, y2]`; `door: 1` is a door, `door: 2` a secret door; `ds: 2` is locked; `preset: "window"` is a window; the portcullis entry blocks movement but not sight. Add the scene's padding offset (Foundry's `sceneX`, `sceneY`) to every coordinate, and send at most 100 walls per call.
 - Familiar's canvas tools (walls, lights, tokens) act on the **active** scene only, so the installer stages scenes carefully. Don't activate scenes yourself during writing.
+- **AI-painted maps:** a painting redraws the layout its own way. After painting, check every entrance the book names (where the heroes arrive, "the side door") against the picture: a door must be visible where the walls file puts one, and the arrival squares must sit just outside a door the players can see. Fix the book's wording or the walls to match the painting, never the other way round. (Playtest: the book's "west side door" was a painted window, and the players couldn't find the way in.)
+- **Sound and dice:** if the world has no playlists, generate one looping music bed per scene (Familiar's generate-music, bound to the scene with play-ambience) so the ambience setting has something to play, and recommend the Dice So Nice module so rolls are visible on the table.
 
 ## 5. Hand over
 

@@ -58,7 +58,7 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
        "misconception": "Heavier objects fall faster"}
     ],
     "beats": [
-      {"id": "B1", "objective": "LO1", "node": "N1", "kind": "introduce"},
+      {"id": "B1", "objective": "LO1", "node": "N1", "kind": "introduce", "shows": "Pim drops two pebbles off the jetty; they splash together"},
       {"id": "B2", "objective": "LO1", "node": "N2", "kind": "practice", "puzzle": "P1"},
       {"id": "B3", "objective": "LO1", "node": "N4", "kind": "assess"}
     ],
@@ -114,7 +114,7 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
 
 **Endings:** at least three (success, partial, failure-forward).
 
-**Teach** (Teach mode only): `subject`, `level`, `style` (`stealth`, the default, or `open`), `lexicon[]` (Stealth: `real`, `world`, `kind` = `jargon` or `slang`, `first_node`; the checker keeps `jargon` out of everything a player reads and `slang` outside quotation marks), `words[]` (Stealth: the word ladder, every world word a player must learn including setting nouns: `word`, `gloss`, `first_node`; at most three new per node), `model[]` (required in Stealth: `real`, `world`, `is`, `lives`, `changed_by`, `moves`, plus `if_asked` lines and an optional `bends`; one entry per real thing or role the world stands in for, see [allegory audit](teach-allegory-audit.md)), `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
+**Teach** (Teach mode only): `subject`, `level`, `style` (`stealth`, the default, or `open`), `lexicon[]` (Stealth: `real`, `world`, `kind` = `jargon` or `slang`, `first_node`; the checker keeps `jargon` out of everything a player reads and `slang` outside quotation marks), `words[]` (Stealth: the word ladder, every world word a player must learn including setting nouns: `word`, `gloss`, `first_node`; at most three new per node), `model[]` (required in Stealth: `real`, `world`, `is`, `lives`, `changed_by`, `moves`, plus `if_asked` lines and an optional `bends`; one entry per real thing or role the world stands in for, see [allegory audit](teach-allegory-audit.md)), `objectives[]` (`id`, `text` with a measurable verb, `bloom`, `misconception`), `beats[]` (`objective`, `node`, `kind`: introduce / practice / assess, optional `puzzle`; introduce beats need `shows`: who shows the idea working and how, with nothing at stake, and may not carry a puzzle; put the puzzle in a practice beat after it, same node is fine), `puzzles[]` (`question`, `answer`, `value`, `tolerance` or `tolerance_abs`, `script`, three `hints`, `in_world_consequence`), `sources[]` (`title`, `url` or `citation`, `covers` objective ids).
 - `bloom`: the thinking level the objective asks for, from Bloom's taxonomy: remember, understand, apply, analyze, evaluate, create. Most adventure puzzles are *apply* or *analyze*.
 - `value` can be a number, a fraction string (`"1/3"`, compared exactly), or any other string (the script's last line must match it, ignoring case) for choices and sequences (`"left, right, middle"`).
 - `answer` is the text the GM will see, and the checker wants it **word for word** somewhere in the book (the Learning Guide's solution is the natural place).

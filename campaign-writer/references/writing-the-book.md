@@ -66,7 +66,7 @@ Rules for nodes:
 **If pushed:** lies once, then cries and tells the truth.
 ```
 
-Give every named NPC a want. Give the important ones something they know, something they hide, and a line of dialogue. Make voices distinct: different rhythms and word choices, not just accents.
+Give every named NPC a want. Give the important ones something they know, something they hide, and a line of dialogue. Make voices distinct: different rhythms and word choices, not just accents. A **Voice** note is seasoning, not a rule for every line: never write "says X every sentence" or "after everything" (an AI GM obeys it and the NPC turns into a caricature); write "says X a lot" and let the GM use it once or twice a scene. The sample line shows rhythm; it isn't a script.
 
 ## Encounter blocks
 

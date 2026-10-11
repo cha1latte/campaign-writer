@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.4.0 (2026-10-11)
+
+**Teach mode: teach before you test. Dialogue: offers and voices that sound like people**
+- Teach before test: the first time players meet an idea is never a bet, a choice with a stake or a puzzle. The *Introduced* beat shows the idea working once with nothing riding on it (a character does it out loud with small numbers, or the world does it in plain view); the predict-with-a-stake moment moves to *Practised*. Show-then-try inside one scene is fine.
+- `shows` on introduce beats in campaign.json: who shows the idea and how. The checker errors when an introduce beat carries a puzzle and warns when it has no `shows`.
+- Fair givens: every number a puzzle needs is said in play before the players commit. A fact they can't know to ask about (the world's calendar, what "let it ride" does) is never left to an *if asked* answer. The student pass in the quality bar now solves puzzles only from what the scene actually puts in front of the players.
+- If players say they weren't taught something, the AI GM fixes it in the fiction (a character shows the idea, no stakes) and never explains it out of character; a loss that came from missing givens is undone in-world for a reason that fits a character.
+- NPC voices: a **Voice** note is seasoning, not a rule for every line. Never write "says X every sentence" (an AI GM obeys it and the NPC turns into a caricature); the sample line shows rhythm, it isn't a script.
+- Foundry hand-off: the Runner Guide tells the AI GM to talk like people (one or two sentences a line, answer what was asked, catchphrases once or twice a scene) and to keep actions out of voiced quotes, because the voice reads everything inside them.
+- Foundry hand-off: after AI-painting a map, check every entrance the book names against the painting and fix the book or the walls to match; generate a music bed per scene if the world has no playlists, and recommend Dice So Nice.
+- Found in live play: a group lost their first wages on a bet about an idea nobody had shown them, with one key fact only available "if asked", and said the puzzle felt unfair.
+
 ## 1.3.0 (2026-10-10)
 
 **Teach mode: onboard, don't flood**
