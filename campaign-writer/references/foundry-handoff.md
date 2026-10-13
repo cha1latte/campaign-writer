@@ -39,10 +39,10 @@ From foundry/pages.json ("source"), in order. Page name, then the file and headi
 - Runner Guide additions: <Teach-mode procedure below, any adventure-specific procedure>
 
 ## Scenes (one per map)
-| Scene | Image | Grid | Size | Walls | Light | Node |
-|---|---|---|---|---|---|---|
-| Hollow Ridge | build/maps/m3-ridge-vtt.png | 100 px, 5 ft | 2400 × 1600 | build/maps/m3-ridge-walls.json (19) | daylight | N4 |
-| Grimwater Valley (travel) | build/maps/m1-valley-player.png | none (travel map) | image size | none | n/a | N1–N8 |
+| Scene | Image | Grid | Size | Walls | Light | Audio | Node |
+|---|---|---|---|---|---|---|---|
+| Hollow Ridge | build/maps/m3-ridge-vtt.png | 100 px, 5 ft | 2400 × 1600 | build/maps/m3-ridge-walls.json (19) | daylight | music: tension, combat on E2; loop: wind in pines | N4 |
+| Grimwater Valley (travel) | build/maps/m1-valley-player.png | none (travel map) | image size | none | n/a | music: adventure | N1–N8 |
 
 Token positions per encounter (in map squares from the top-left; convert to pixels with the grid size,
 then add the scene padding): E2: troll whelp at (20, 10); hero arrives on the path at (1, 12).
@@ -58,8 +58,10 @@ handouts/00-pitch.md, handouts/01-…md
 handouts/found/01-…md (given out in N3), …
 
 ## Table Rules lines to merge
-<the block below, filled in>
+<the block below, filled in; any campaign with fights also gets the combat line>
 ```
+
+**Combat line** (about 230 characters, any campaign with fights): `In fights, NPCs speak dialogue only: one short sentence after a notable action (big hit, crit, miss, kill, spell), no narration or action descriptions; the roll cards carry the dice. Mostly round 1, then big moments. Beasts don't talk.` The runner takes each creature's voice from the encounter's **Lines** (on the Source page), never from the actor sheet: Familiar doesn't read the biography field.
 
 ## 3. Teach-mode rules for the AI GM
 
@@ -156,8 +158,11 @@ Status: LO1 practised 1/2, assessed no; LO2 not yet met
 - VTT images are `build/maps/<id>-vtt.png`: exactly `cols × foundry_px` by `rows × foundry_px` pixels. Foundry needs them under its own **Data** folder (for example `Data/campaign-writer/<slug>/`), not a local path elsewhere. Tell the installing assistant or the GM to copy `build/maps/*-vtt.png` there.
 - Walls are in `build/maps/<id>-walls.json`, in image pixels, already in the shape Familiar's `create-walls` takes: `c` is `[x1, y1, x2, y2]`; `door: 1` is a door, `door: 2` a secret door; `ds: 2` is locked; `preset: "window"` is a window; the portcullis entry blocks movement but not sight. Add the scene's padding offset (Foundry's `sceneX`, `sceneY`) to every coordinate, and send at most 100 walls per call.
 - Familiar's canvas tools (walls, lights, tokens) act on the **active** scene only, so the installer stages scenes carefully. Don't activate scenes yourself during writing.
+- **Painting the maps:** paint each VTT map fresh from text; an edit of the code-drawn map drifts and loses quality. Write the prompt in three parts. (1) A **style line** shared by every map in the campaign: view, look, palette, outlines, "No grid", for example `Top-down 90° battle map, flat hand-drawn cartoon style, soft matte pastel palette, bold dark ink outlines on terrain edges, cel shading, minimal texture. No grid`. (2) A **content paragraph** that names every feature the book uses by compass position (`a stone toll arch across the road in the east; a dry riverbed crossing under a short bridge in the west`), asks for the scene's own grid (`for a 24 by 16 square grid`, from the map's cols × rows), and ends `Open playable ground everywhere`. (3) The **style line again**, then no grid lines, text, labels, creatures or border. Never put the game's name in the style line: the model paints it as a title.
 - **AI-painted maps:** a painting redraws the layout its own way. After painting, check every entrance the book names (where the heroes arrive, "the side door") against the picture: a door must be visible where the walls file puts one, and the arrival squares must sit just outside a door the players can see. Fix the book's wording or the walls to match the painting, never the other way round. (Playtest: the book's "west side door" was a painted window, and the players couldn't find the way in.)
-- **Sound and dice:** if the world has no playlists, generate one looping music bed per scene (Familiar's generate-music, bound to the scene with play-ambience) so the ambience setting has something to play, and recommend the Dice So Nice module so rolls are visible on the table.
+- **Music comes from playlists, not generation.** Use the GM's own playlists or a free music-pack module; Familiar's search-ambience finds tracks by playlist and track name, so loop versions named by mood (tavern, tension, combat) work best. Fill each scene's Audio cell with a mood and a combat track. Only if the world has no music at all, generate-music one bed per mood (not per scene).
+- **Ambience and one-shots: generate once at install, then reuse.** With generate-sound-effect: loops 15–22 s with `loop: true, placement: "playlist"` (they land in "Familiar Ambience", where search-ambience finds them again); one-shots 3–5 s for a door, thunder, a roar. Name 3–4 separate sounds, not a mood (`warm tavern interior, low crowd murmur, clinking mugs, crackling hearth, a lute playing softly`). Say what to leave out (`no music, no voices, no thunder cracks`): a thunder crack on a rain loop gets annoying on repeat. Write `steady` or `constant` for loops and keep the drama for one-shots. Set loud loops to about 20% so they sit under the music. Every generated sound posts a public card, so make them before play or keep the descriptions spoiler-free.
+- **Dice:** recommend the Dice So Nice module so rolls are visible on the table.
 
 ## 5. Hand over
 

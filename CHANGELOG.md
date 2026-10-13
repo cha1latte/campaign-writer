@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0 (2026-10-13)
+
+**Table presentation: painted maps, library music, combat lines**
+- Encounter blocks get a **Lines** field: a few-word personality and two short spoken lines for each creature that talks. The Foundry hand-off adds a Table Rules combat line (NPCs speak dialogue only in fights: one sentence after a notable action, mostly round 1, no narration).
+- Painting VTT maps: a three-part prompt (shared style line, content paragraph by compass position with the scene's grid and "open playable ground everywhere", style line again).
+- Sound: music from playlists or a free pack, not generated per scene; ambience loops and one-shots generated once and reused, with prompt rules (layered sounds, say what to leave out, "steady" for loops, about 20% volume). The hand-off's Scenes table gains an Audio column.
+
 ## 1.4.0 (2026-10-11)
 
 **Teach mode: teach before you test. Dialogue: offers and voices that sound like people**

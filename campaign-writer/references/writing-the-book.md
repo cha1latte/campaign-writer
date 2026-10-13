@@ -76,12 +76,15 @@ Give every named NPC a want. Give the important ones something they know, someth
 **Difficulty:** moderate for one level-3 character (budget 225 XP; 200 XP spent).
 **Enemies:** 1 **troll whelp** (see Bestiary). **Terrain:** knee-deep snow (difficult terrain off the path), a frozen pond (DC 10 Dexterity (Acrobatics) to cross at full speed), two boulders (half cover).
 **Tactics:** it charges from the pines at the first person on the path, drags them toward the pond, and flees at half HP to the cave (**N6**), leaving a blood trail.
+**Lines:** whelp, hungry and dim: "Meat on the path!" / "Pond's cold. You'll like it."
 **Avoid it:** a hero who spots the tracks (DC 13 Wisdom (Survival)) can circle the ridge and lose 1 hour instead.
 **Scaling:** weaker hero: the whelp starts wounded (half HP). Stronger: add a second whelp at round 2.
 **Aftermath:** a torn satchel holding the patrol's map (→ **N4**).
 
 ![Map 3: Hollow Ridge](map:m3-ridge){wide}
 ```
+
+**Lines** give each creature that talks a personality in a few words and two short spoken lines in its voice (named NPCs from their card's Voice; beasts don't talk, so leave them out). In a fight the GM posts one sentence as that creature after a notable action (big hit, crit, miss, kill, spell), mostly in round 1 and then only for big moments. Write spoken words only, no "she snarls": the dice and damage are already on the roll cards, so the line is just the reaction. Never write lines for the player characters.
 
 ## Style
 
