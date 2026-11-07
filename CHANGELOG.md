@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.1 (2026-11-06)
+
+**Lessons from looping a campaign through the gates (eight simulated rounds)**
+- D&D 5e: counting a steel defender or beast companion as a full character, with no other change, overshoots (a "low" fight nearly killed the hero). Cap attackers on the hero (two at levels 1-4, three at 5-10), make hired muscle and hungry beasts break at the first real loss, never aim enemies at "the smallest", and give every fight that can drop the party a fail-forward.
+- Three gates: a simulated player plateaus near 8/10 whatever happens, so read its feeling tags, not its numbers; take coverage from the GM's beat checklists, not the plan (segments run out of turns before their last scenes); simulation finds and fixes design faults (about 4 to about 8 on every gate in the worked example), but the last half-point belongs to the real player.
+
 ## 1.6.0 (2026-11-06)
 
 **The three gates: is it fun, is it D&D, does it really teach**

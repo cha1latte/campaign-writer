@@ -34,7 +34,10 @@ Two separate agents, so the player can't have read the book:
 - **Debrief:** after each segment ask the player agent, out of character: what were you trying to do, did you always know what to do next, best and worst moment, fun and D&D out of 10, when were you lost or bored, did it feel like school. **Teach:** "Without using anything the game didn't show you, explain to a friend how this works."
 - **Quiz, four ways (Teach).** A short real-world quiz on every objective, taken by: (1) a fresh beginner agent before any play, (2) a fresh agent that only reads the Decoder (the control), (3) the played agent before the Decoder, (4) the played agent after it. The bar is 80% for (4), clearly above (1) and (2). A model can't fully forget what it knows, so (1) runs high; the judge also checks that every right answer in (3) is backed by a moment in the transcript.
 
-A simulated player is evidence, not proof. Say which you have.
+A simulated player is evidence, not proof. Say which you have. Three things learned the hard way:
+- **It plateaus.** A model playing a player rates almost every scene about 8/10 whatever happens. Its numbers stop carrying information after the first round or two; read its feeling tags and debriefs for *what* worked and didn't.
+- **Check coverage from the GM checklists, not your plan.** Segments run out of turns before their last scenes; an evidence index that says "played N12" when the run stopped at the door misleads every judge after it. List what was actually reached.
+- **It can't clear the last half-point.** Simulation is good for finding and fixing design faults (it took a rebuilt campaign from about 4 to about 8 on every gate). The final call on fun, and on "it felt like school", belongs to the real player.
 
 ## Gate 1: Is it fun?
 
