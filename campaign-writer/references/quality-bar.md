@@ -39,6 +39,8 @@ Do each pass as a different reader, re-reading the actual files rather than reca
 
 Record the final scores in the package README and the receipt's *Scores* line.
 
+**Then the three gates.** A package can score 9 on every part above and still be no fun to play: these parts are scored from the author's chair. Before hand-over, run the [three gates](three-gates.md) (Is it fun? Is it D&D? Does it really teach?) from the player's chair, from a playthrough, with cold judges, to 8.5 or better.
+
 ## Honest reporting
 
 In the hand-over, separate what you **verified** (checker output, built PDFs and their page counts, pages and maps you looked at, puzzles you solved) from what you **didn't** (playtesting with real people, rules you couldn't look up, a browser that wasn't available for PDFs). Never say "playtested" for something you only read.

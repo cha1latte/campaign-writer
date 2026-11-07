@@ -7,13 +7,14 @@ description: Use when someone wants an original tabletop RPG adventure or campai
 
 Turn a one-line wish into the kind of adventure people buy and actually run: a GM book that works at the table, maps for print and VTT, player handouts, and numbers that hold up. In **Teach mode** the subject *is* the gameplay: players learn physics by predicting where the boulder lands, not by answering a quiz to open a door. By default the learning stays hidden (**Stealth**): the world has its own words, the story is about something else, and nobody feels taught.
 
-Five rules shape everything:
+Six rules shape everything:
 
 1. **Wish in, product out, with the fewest questions.** Infer what you can. Ask one short round only when the answer changes the build (system, who plays, how long).
 2. **Bones before prose.** Design the adventure as data in `campaign.json` (places, clues, NPCs, fights, lessons), run the checker, and only then write chapters. Structural mistakes are cheap to fix in data and expensive in a 12,000-word book.
 3. **Runnable at the table.** A GM glancing at a page mid-game finds what's here, what's hidden, what happens next and every number they need. Read-aloud stays short. Nothing important is buried in a paragraph.
 4. **Protect the player's surprise.** If the person asking will *play* it, never put the plot, twists, monsters, clue answers or puzzle solutions in chat. They get a back-cover pitch and a file path.
 5. **Prove it.** The checker passes, the PDF builds, and you've looked at the pages and maps. Report what you verified and what you didn't.
+6. **Pass the three gates.** Is it fun? Is it D&D (or whatever game it's for)? In Teach mode, does it really teach? Each must score **8.5 out of 10 or better**, judged cold from a playthrough, not from the book. A package can be well made and still not be fun to play.
 
 ## 0. Before you start
 
@@ -66,7 +67,11 @@ python <skill>/tools/build_book.py campaigns/<slug>          # GM book + handout
 
 The build also re-renders every map (SVG and PNG) and warns about unrendered markdown and handouts that spill onto a second page. Then **look**: `python <skill>/tools/preview_pdf.py build/<slug>-gm-book.pdf` makes contact sheets (6 pages each) and `--pages 5,9` renders single pages up close. Look at every contact sheet (handout PDFs are skipped for gaps: their pages are short by design), a few pages at full size, every map PNG in `build/maps/`, and the handouts. The preview also prints `GAP` lines for pages where a column stops early; check each one (a chapter's last page is fine). Fix overflow, gaps, collisions and anything a reader would trip on. Then run the review passes and the score sheet in [Quality bar](references/quality-bar.md), and fix any part scoring under 8.
 
-## 7. Hand over
+## 7. Pass the three gates
+
+The score sheet says the package is well made. The gates say it's worth playing. Run a playthrough (a real session, or a simulated one: a GM agent with the book and a player agent with only the handouts and a profile of the real player), give the transcript to three cold judges, one per gate, and loop: fix the lowest criterion at its root in the design, re-run what changed, re-score with fresh judges, until **Fun, D&D and (Teach) Teaches are all 8.5+**. Log every round in `gates-log.md` and end it with the `Final:` line the checker reads. Book-only scoring caps at 7. If a real player later says it isn't fun, believe them over the scores and start a new round from their session log. Rubric, caps, the simulated-playthrough method and the fixes that usually work: [The three gates](references/three-gates.md).
+
+## 8. Hand over
 
 Write `README.md` in the package (what's inside, how to run it, licence). Then give the user a short receipt in chat:
 
@@ -75,6 +80,7 @@ Ready:     <title>, <system>, <players/level>, <sessions>; start by reading <fil
 Package:   GM book (N pages), handouts (N pages), N maps (GM/player/VTT), N pregens
 Verified:  checker 0 errors / N warnings kept (why); PDFs built and inspected; maps inspected; Teach: allegory audit, N fixes
 Scores:    the quality-bar parts out of 10 (also in the README)
+Gates:     Fun N / D&D N / Teaches N, and what they rest on (real play, simulated playthrough, or book only)
 Not done:  anything skipped or unverified
 Next:      the one next step (e.g. "install in Foundry with foundry-familiar-campaigns")
 ```
@@ -99,4 +105,5 @@ If the requester is the GM, add the GM pitch (a few lines: what's really going o
 | [systems/pf2e.md](references/systems/pf2e.md) | Pathfinder 2e (remaster) |
 | [systems/other.md](references/systems/other.md) | Any other system |
 | [quality-bar.md](references/quality-bar.md) | Before hand-over: review passes and score sheet |
+| [three-gates.md](references/three-gates.md) | Before hand-over, and whenever a player says it isn't fun: Fun, D&D and Teaches gates, 8.5 minimum |
 | [foundry-handoff.md](references/foundry-handoff.md) | The table plays in Foundry, especially with Familiar |

@@ -121,6 +121,7 @@ Rules material from open licences (SRD 5.2.1 under CC-BY, Pathfinder under ORC) 
 - **Every rules number** (encounter budgets, CR and XP, DCs, creature levels) was checked against SRD 5.2.1 and Archives of Nethys, not memory.
 - **Played live in Foundry** by two different AI game masters (an outside Claude and Familiar's own), running Teach mode the way it's meant to go.
 - **A built-in checker** catches dead ends, missing clues, unfair fights, wrong puzzle answers, spoilers in player handouts and missing licence notices before you see the book.
+- **The three gates.** Before hand-over, every campaign has to score 8.5/10 or better on *Is it fun?*, *Is it D&D?* and (Teach mode) *Does it really teach?*. These are judged from a playthrough, real or simulated, by cold judges who didn't write it, and looped until they pass. A campaign can be well made and still not be fun to play; this is the check for that.
 
 ## Good to know
 

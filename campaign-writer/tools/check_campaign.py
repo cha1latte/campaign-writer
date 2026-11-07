@@ -818,6 +818,42 @@ def check_maps(c, root, book_text, rep):
         rep.warn("maps", "no maps; add at least the key locations unless the table plays theatre-of-the-mind")
 
 
+GATE_MIN = 8.5
+GATE_RE = re.compile(r"^\s*Final:\s*(.+)$", re.I | re.M)
+
+
+def check_gates(c, root, rep):
+    """The three gates (references/three-gates.md): Fun, D&D and, in Teach mode, Teaches, each 8.5+ from a playthrough."""
+    log = Path(root) / "gates-log.md"
+    teach = c.get("mode") == "teach"
+    if not log.is_file():
+        rep.warn("gates", "no gates-log.md; before hand-over score the three gates (Is it fun? Is it D&D?"
+                          + (" Does it really teach?" if teach else "") + ") from a playthrough with cold judges, "
+                          "8.5 minimum each (references/three-gates.md)")
+        return
+    lines = GATE_RE.findall(log.read_text(encoding="utf-8"))
+    if not lines:
+        rep.warn("gates", "gates-log.md has no 'Final: Fun N / D&D N / Teaches N' line yet")
+        return
+    last = lines[-1]
+    want = [("fun", r"fun"), ("D&D", r"d&d|dnd|game")] + ([("teaches", r"teach(?:es)?")] if teach else [])
+    bad, got = [], []
+    for name, pat in want:
+        m = re.search(r"\b(?:" + pat + r")\s*[:=]?\s*(\d+(?:\.\d+)?)", last, re.I)
+        if not m:
+            rep.err("gates", f"gates-log.md Final line has no {name} score: {last.strip()[:90]!r}")
+            continue
+        v = float(m.group(1))
+        got.append(f"{name} {v:g}")
+        if v < GATE_MIN:
+            bad.append(f"{name} {v:g}")
+    if bad:
+        rep.err("gates", f"gates under {GATE_MIN}: {', '.join(bad)}; fix the lowest criterion at its root and run another round")
+    elif got:
+        how = "book only (capped at 7)" if re.search(r"book only", last, re.I) else "see the log for what it rests on"
+        rep.ok("gates", f"three gates passed: {', '.join(got)} ({how})")
+
+
 def check_npcs(c, node_ids, book_text, rep):
     npcs = c.get("npcs", [])
     ids_unique(npcs, "npc", rep, "structure")
@@ -865,6 +901,7 @@ def run(root):
     check_crossrefs(c, book_text, {**player_docs, **found}, rep)
     check_writing(c, book, all_docs, rep)
     check_maps(c, root, book_text, rep)
+    check_gates(c, root, rep)
     return rep
 
 

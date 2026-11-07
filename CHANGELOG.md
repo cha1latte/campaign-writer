@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.6.0 (2026-11-06)
+
+**The three gates: is it fun, is it D&D, does it really teach**
+- New `references/three-gates.md`. A campaign ships only when it scores **8.5/10 or better** on three gates scored from the player's chair: **Is it fun?** (hook in five minutes, always knows what to do and why, the player drives, light load, payoffs, the hero matters, variety), **Is it D&D?** (three pillars every session, danger budgeted for the real party, earned bypasses, class spotlight, loot, fantasy not an office, rules that hold), and in Teach mode **Does it really teach?** (learned by doing, shown before tested, felt not told, comes back, true and transferable, invisible). Each criterion has a 10 and a 5 anchor and needs quoted evidence. Hard caps catch the failures that sink a session no matter how good the rest is.
+- How to score: from a playthrough, not the book (book-only caps at 7); one cold judge per gate; fix the lowest criterion at its root, re-run what changed, re-score with fresh judges, repeat. The real player overrules the judges.
+- A **simulated playthrough** method: a GM agent with the book, a book-blind player agent built from a profile of the real player, real random dice on both sides, beat checklists so judges can separate GM slips from design flaws, a four-way real-world quiz with a decoder-only control, and cost advice (segment it; a full-book relay on a top model is expensive).
+- SKILL.md: a sixth rule and a new step 7, *Pass the three gates*; the receipt gains a Gates line. Quality bar points to the gates after the score sheet.
+- Teach mode: new principles 11 to 14: **nobody explains, things happen**; **the player reasons, a companion counts**; **a plot rule isn't an objective**; **catch misconceptions in the world**. Principle 7: the adventure comes first, and in session 1 the first fight or hazard comes before any lesson beyond a one-line showing. Principle 10: six to eight invented words in a whole campaign is plenty; prices, sides of a trade and fees in plain English.
+- D&D 5e: class features that put a second combatant on the field (steel defender, beast companion, drake) count as a character for budgets; re-budget when the player brings their own hero.
+- Brief intake: read the player's own sheet before designing (companion, class tools, languages that hand out free bypasses, backstory hooks).
+- Checker: reads `gates-log.md` and errors if a gate's final score is under 8.5; warns if there's no log yet.
+- Found in play: a Teach campaign that passed every structural check, and scored 8.5+ on every part of the old score sheet, lost its real player after one session ("too many words, didn't know what to do or why, not enough D&D, felt like school"). Cold judges scored it Fun 3.6, D&D 3.7, Teaches 4.0. The rebuild using these gates reached about 8 on all three within four rounds and is still being looped.
+
 ## 1.5.0 (2026-10-13)
 
 **Table presentation: painted maps, library music, combat lines**

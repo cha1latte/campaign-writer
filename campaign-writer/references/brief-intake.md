@@ -25,6 +25,8 @@ Pull these out of the request, the conversation and the user's environment (an o
 
 **Edition note.** "D&D" with nothing else means the 2024 rules, because SRD 5.2.1 is the current free reference. If the user's world or sheets are 2014, use 2014 (SRD 5.1); monster XP by CR is the same in both.
 
+**The player's own hero.** If the player brings their own character, read the whole sheet before designing: their companion or pet (re-budget fights for it), class features and tools (write one moment per session only this hero could solve), languages (don't hand them a free bypass by accident: a carved watchword in a language they read), and their backstory (tie the opening hook to someone in it).
+
 ## When to ask
 
 Ask one short round (up to three questions, with your default stated so they can just say "go") only if:
