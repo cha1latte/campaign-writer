@@ -17,6 +17,8 @@ What it checks (see references/quality-bar.md for why):
               a teach.model for the allegory audit (fields only: whether the story obeys it is a reading job)
   spoilers    spoiler terms absent from handouts, pregens, the player pitch and player maps
   writing     placeholders, read-aloud length, stock AI phrasing, licence/attribution text
+  npcs        ancestry, the person pass on major NPCs, ties, overused / rulebook / look-alike names,
+              names reused from other campaigns in the same parent folder, phrases copied from the skill's examples
 """
 import json
 import re
@@ -59,6 +61,25 @@ STOCK_PHRASES = ["a testament to", "tapestry", "delve into", "palpable", "unbekn
                  "eldoria", "whispering woods", "the air is thick with", "sends shivers down", "a sense of foreboding",
                  "hauntingly beautiful", "steeped in", "rich tapestry", "in the heart of", "the fate of the realm",
                  "dark forces", "mysterious stranger", "eerie silence", "ominous", "otherworldly glow", "brimming with"]
+# Names a generator reaches for again and again (seen across real campaign runs); see references/npcs.md.
+OVERUSED_NAMES = {"elara", "lyra", "kael", "thorne", "seraphina", "aldric", "elowen", "vex", "silas", "zephyr", "isolde",
+                  "ysolde", "tamsin", "odile", "osric", "pell", "wick", "hesketh", "jory", "brask", "fisk", "quill",
+                  "ashby", "hale", "dunmore", "ambrose", "oriel", "morwen", "corvin", "rowan"}
+# Example names printed in the rulebooks' name tables: experienced players recognise them.
+RULEBOOK_NAMES = {"eldeth", "helja", "kathra", "gurdis", "tordek", "loderr", "dankil", "battlehammer", "frostbeard",
+                  "fireforge", "dench", "feng", "henk", "holg", "krusk", "mhurren", "thokk", "baggi", "emen", "neega",
+                  "sutha", "vola", "perrin", "merric", "lidda", "goodbarrel", "tealeaf", "underbough", "thorngage",
+                  "meepo", "irtos", "kashak", "sniv", "taklak", "urak", "aramil", "caelynn", "theren", "mindartis",
+                  "bharash", "donaar", "akra", "farideh"}
+# Words in an NPC's name that are titles or particles, not the name itself.
+NAME_TITLES = {"the", "old", "young", "mother", "father", "brother", "sister", "warden", "captain", "dame", "sir", "lady",
+               "lord", "master", "mistress", "gran", "granny", "auntie", "aunt", "uncle", "doctor", "professor", "reeve",
+               "speaker", "lieutenant", "mister", "ma", "pa", "saint", "of", "van", "von", "de", "la", "le", "da", "del",
+               "and", "big", "little", "mr", "mrs", "ms", "miss", "madam", "bishop", "priest", "elder", "chief", "king",
+               "queen", "prince", "princess", "baron", "baroness", "count", "countess", "duke", "duchess"}
+PERSON_FIELDS = ("life", "loves", "contradiction", "lore", "ties", "without_heroes", "trope", "twist")
+# Lines copied from an earlier sample card that kept turning up word for word in generated books.
+COPIED_TELLS = ["broad as a door", "before bad news"]
 SRD_ATTRIBUTION = ["System Reference Document 5.2.1", "creativecommons.org/licenses/by/4.0"]
 SRD51_ATTRIBUTION = ["System Reference Document 5.1", "creativecommons.org/licenses/by/4.0"]
 ORC_MARKERS = ["ORC License"]
@@ -854,17 +875,165 @@ def check_gates(c, root, rep):
         rep.ok("gates", f"three gates passed: {', '.join(got)} ({how})")
 
 
-def check_npcs(c, node_ids, book_text, rep):
+def name_words(name):
+    """The words of an NPC's name that are the name itself (titles and particles dropped), lower case."""
+    return [w for w in re.findall(r"[A-Za-z][a-z'\-]+", name or "") if w.lower() not in NAME_TITLES and len(w) > 2]
+
+
+def is_major(n):
+    if "major" in n:
+        return bool(n["major"])
+    return len(n.get("appears", [])) >= 2
+
+
+def check_npcs(c, node_ids, book_text, rep, root=None):
     npcs = c.get("npcs", [])
     ids_unique(npcs, "npc", rep, "structure")
+    ids = {n.get("id") for n in npcs}
+    dnd = str(c.get("system", "")).startswith("dnd5e")
+    no_ancestry = []
     for n in npcs:
+        label = n.get("name", n.get("id"))
         for a in n.get("appears", []):
             if a not in node_ids:
                 rep.err("structure", f"npc {n.get('id')} appears in unknown node {a!r}")
         if n.get("name") and n["name"] not in book_text and not BONES:
             rep.warn("structure", f"npc {n['name']} is listed but never named in the book")
         if not n.get("wants"):
-            rep.warn("structure", f"npc {n.get('name', n.get('id'))} has no 'wants'; give every NPC a goal")
+            rep.warn("npcs", f"{label} has no 'wants'; give every NPC a goal")
+        if dnd and not n.get("ancestry"):
+            no_ancestry.append(label)
+        for t in n.get("ties", []) or []:
+            target = t.get("npc") if isinstance(t, dict) else None
+            if target not in ids:
+                rep.err("npcs", f"{label} has a tie to unknown npc {target!r}")
+            elif target == n.get("id"):
+                rep.warn("npcs", f"{label} has a tie to itself")
+            elif not (isinstance(t, dict) and t.get("history")):
+                rep.warn("npcs", f"{label}'s tie to {target} has no 'history': what happened between them?")
+        if is_major(n):
+            missing = [f for f in PERSON_FIELDS if not n.get(f)]
+            if missing:
+                rep.warn("npcs", f"major NPC {label} is missing the person pass: {', '.join(missing)} (see references/npcs.md)")
+        if is_major(n) and not BONES and n.get("name"):
+            check_card(n, book_text, rep)
+    if no_ancestry:
+        rep.warn("npcs", f"{len(no_ancestry)} NPC(s) with no 'ancestry': {', '.join(no_ancestry[:8])}")
+    if npcs and not c.get("naming"):
+        rep.warn("npcs", "no 'naming' rules: decide how each people in the setting names itself before naming anyone")
+    check_names(c, npcs, rep, root)
+
+
+def pregen_names(root):
+    """The first heading of each pregen file, taken as that character's name."""
+    out = []
+    if root is None:
+        return out
+    for p in sorted((Path(root) / "pregens").glob("*.md")):
+        m = re.search(r"^#\s+(.+)$", p.read_text(encoding="utf-8"), re.M)
+        if m:
+            out.append(re.split(r"[,:(|]", m.group(1))[0].strip())
+    return out
+
+
+def check_card(n, book_text, rep):
+    """A major NPC's card: found by a heading with its name; one field per line; If pushed present."""
+    words = name_words(n["name"])
+    if not words:
+        return
+    m = None
+    for h in re.finditer(r"^#{2,4}\s+(.+)$", book_text, re.M):
+        if words[0] in h.group(1):
+            m = h
+            if "**Wants:**" in book_text[h.end():h.end() + 3000].split("\n#")[0]:
+                break
+    if m is None:
+        return
+    card = book_text[m.end():].split("\n#")[0]
+    if "**Wants:**" not in card:
+        return
+    label = n["name"]
+    if "If pushed" not in card:
+        rep.warn("npcs", f"{label}'s card has no **If pushed:** (what they do when cornered, and the line they say when they break)")
+    for ln in card.splitlines():
+        if sum(f in ln for f in ("**Wants:**", "**Knows:**", "**Hides:**")) > 1:
+            rep.warn("npcs", f"{label}'s card runs Wants/Knows/Hides together on one line; give each its own line")
+            break
+
+
+def check_names(c, npcs, rep, root):
+    words = {}  # lower-case name word -> NPC labels that use it
+    for n in npcs:
+        for w in name_words(n.get("name")):
+            words.setdefault(w.lower(), []).append(n.get("name"))
+    pregen_words = {w.lower() for name in pregen_names(root) for w in name_words(name)}
+    over = sorted(w for w in set(words) | pregen_words if w in OVERUSED_NAMES)
+    if over:
+        rep.warn("npcs", "overused names in NPCs or pregens (pick something the setting's naming rules produce): " + ", ".join(over))
+    book = sorted(w for w in set(words) | pregen_words if w in RULEBOOK_NAMES)
+    if book:
+        rep.warn("npcs", "names copied from rulebook name tables (players recognise them): " + ", ".join(book))
+    firsts = {}
+    for n in npcs:
+        ws = name_words(n.get("name"))
+        if ws and len(ws[0]) >= 4:
+            firsts.setdefault(ws[0][:3].lower(), set()).add(ws[0])
+    for prefix, group in sorted(firsts.items()):
+        if len(group) > 1:
+            rep.warn("npcs", f"names that blur together at the table (same first three letters): {', '.join(sorted(group))}")
+    if root is None:
+        return
+    series = c.get("series")
+    seen = {}
+    for other in sorted(Path(root).parent.glob("*/campaign.json")):
+        if other.parent.resolve() == Path(root).resolve():
+            continue
+        try:
+            oc = json.loads(other.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if series and oc.get("series") == series:
+            continue
+        for on in oc.get("npcs", []):
+            for w in name_words(on.get("name")):
+                if w.lower() in words:
+                    seen.setdefault(w.lower(), set()).add(other.parent.name)
+    for w, where in sorted(seen.items()):
+        rep.warn("npcs", f"name {w.capitalize()!r} is already used in {', '.join(sorted(where))}; "
+                         "pick a new one, or set the same 'series' in both if it's a sequel")
+    if not seen:
+        rep.ok("npcs", f"{len(words)} name words, none shared with other campaigns in {Path(root).parent.name}/")
+
+
+def example_shingles(n=6):
+    """Six-word runs from the sample NPC cards in references/npcs.md, which must never be copied into a book."""
+    ref = HERE.parent / "references" / "npcs.md"
+    if not ref.exists():
+        return set()
+    blocks = re.findall(r"```markdown\n(.*?)```", ref.read_text(encoding="utf-8"), re.S)
+    out = set()
+    for b in blocks:
+        toks = re.findall(r"[a-z']+", re.sub(r"\*\*[A-Za-z ]+:\*\*", " ", b).lower())
+        out.update(" ".join(toks[i:i + n]) for i in range(len(toks) - n + 1))
+    return out
+
+
+def check_copied(all_docs, rep, n=6):
+    shingles = example_shingles(n)
+    hits = set()
+    for name, text in all_docs.items():
+        toks = re.findall(r"[a-z']+", re.sub(r"\*\*[A-Za-z ]+:\*\*", " ", text).lower())
+        for i in range(len(toks) - n + 1):
+            s = " ".join(toks[i:i + n])
+            if s in shingles:
+                hits.add(s)
+        low = text.lower()
+        for tell in COPIED_TELLS:
+            if tell in low:
+                hits.add(tell)
+    if hits:
+        rep.warn("npcs", f"{len(hits)} phrase(s) copied from the skill's sample NPCs: " +
+                 "; ".join(f"'{h}'" for h in sorted(hits)[:5]) + ". Write this NPC's own detail instead")
 
 
 def run(root):
@@ -880,7 +1049,7 @@ def run(root):
     book_text = "\n".join(book.values())
     check_basics(c, root, book, rep)
     node_ids = check_graph(c, book_text, rep)
-    check_npcs(c, node_ids, book_text, rep)
+    check_npcs(c, node_ids, book_text, rep, root)
     check_encounters(c, node_ids, rep)
     if c.get("mode") == "teach":
         check_teach(c, root, node_ids, book_text, rep)
@@ -900,6 +1069,7 @@ def run(root):
     all_docs.update(found)  # found-in-play documents: placeholder and phrasing checks, not spoiler checks
     check_crossrefs(c, book_text, {**player_docs, **found}, rep)
     check_writing(c, book, all_docs, rep)
+    check_copied(all_docs, rep)
     check_maps(c, root, book_text, rep)
     check_gates(c, root, rep)
     return rep

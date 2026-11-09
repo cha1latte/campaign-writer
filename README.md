@@ -58,6 +58,8 @@ Four of them are yours to play right now, with GM book, handouts, maps and VTT f
 
 For D&D, adventures are written to belong in the game, not just to use its rules. Every named NPC has an ancestry and a name that sounds like it (dwarves with clan names, short blunt orcs, kobolds named for what they do), creatures act on their lore (a kobold meeting a dragon is awestruck; a copper dragon opens with a joke and sulks if you don't laugh), and stat blocks keep the SRD's own names. A reference with sources is in [`dnd-lore.md`](campaign-writer/references/dnd-lore.md).
 
+NPCs are written as people, not plot parts. Each main character gets a life the plot interrupted, something they love, a contradiction, history with someone else in the cast, a piece of their people's lore that changes what they do, and a plan for when nobody helps. They're checked against the stock type they're closest to. Names come from naming rules set for each people in the setting, and the checker warns on overused names, names lifted from rulebook tables, and names you've already used in another campaign. See [`npcs.md`](campaign-writer/references/npcs.md).
+
 ## 🎓 Teach mode: learn by playing
 
 Ask it to teach and the subject *is* the game. You learn free fall by timing the lift that fell, fractions by keeping a magic candle from burning out, momentum by stopping a runaway ore cart. You won't answer a quiz to open a door.

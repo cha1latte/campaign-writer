@@ -56,17 +56,7 @@ Rules for nodes:
 
 ## NPC cards
 
-```markdown
-### Marta Grell, the toll-keeper {#marta}
-
-*Sixty, broad as a door, a sealskin coat over a smith's apron.* **Voice:** slow, says "aye" before bad news.
-**Wants:** to keep the bridge open so the village doesn't starve. **Fears:** the trolls coming back for the debt.
-**Knows:** the trolls came from the Grey Teeth (→ **N5**); her husband paid them in salted fish for twenty years.
-**Hides:** she still owes them, and the payment is due on Day 4 (→ **C1**).
-**If pushed:** lies once, then cries and tells the truth.
-```
-
-Give every named NPC a want. Give the important ones something they know, something they hide, and a line of dialogue. Make voices distinct: different rhythms and word choices, not just accents. A **Voice** note is seasoning, not a rule for every line: never write "says X every sentence" or "after everything" (an AI GM obeys it and the NPC turns into a caricature); write "says X a lot" and let the GM use it once or twice a scene. The sample line shows rhythm; it isn't a script.
+The card format, three worked examples (a major NPC, a second major NPC, a minor one) and the person pass behind them are in [Writing NPCs](npcs.md). In short: every named NPC gets an ancestry, a want, one specific detail and a line; major NPCs also get their ordinary life, what they love, a contradiction, a tie with history to another NPC, the lore that shapes them, and what they'll do if nobody steps in. Make voices distinct: different rhythms and word choices, not just accents. Don't copy names, phrases or details from the examples; the checker flags them.
 
 ## Encounter blocks
 

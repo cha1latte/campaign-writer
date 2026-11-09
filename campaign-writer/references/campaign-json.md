@@ -36,9 +36,23 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
     {"id": "K2", "in": "N3", "points_to": "C1", "text": "Fresh tool marks on the pulley housing"},
     {"id": "K3", "in": "N2", "points_to": "C1", "text": "The tower tilts toward the side with the missing weights"}
   ],
+  "naming": [
+    {"people": "academy humans", "style": "given name + the town they came from", "sounds": "long vowels, -ane/-ory endings"}
+  ],
   "npcs": [
-    {"id": "P1", "name": "Pim", "appears": ["N1", "N2"], "wants": "to prove apprentices can fix the tower",
-     "secret": "dropped a cable cutter near the shaft in a panic"}
+    {"id": "P1", "name": "Ennis of Larrow", "ancestry": "human", "major": true, "appears": ["N1", "N2"],
+     "wants": "to prove apprentices can fix the tower",
+     "knows": "the counterweights were checked the night before",
+     "secret": "dropped a cable cutter near the shaft in a panic",
+     "life": "sleeps in the gear loft so he can be first to the morning oiling",
+     "loves": "the tower's noise; he can tell the hour by the hum",
+     "contradiction": "wants credit for everything and can't bear to be watched working",
+     "lore": "the Academy's oath forbids apprentices from touching the great gears unsupervised; he has broken it every night for a year",
+     "ties": [{"npc": "P2", "history": "the master mechanic took him in after his father fell from this tower"}],
+     "without_heroes": "confesses to the wrong thing on day 2 to protect his master",
+     "trope": "eager apprentice", "twist": "he is the most competent person in the tower and lies to hide it; under pressure he goes silent, not chatty"},
+    {"id": "P2", "name": "Master Odrun Feldane", "ancestry": "dwarf", "major": false, "appears": ["N2"],
+     "wants": "to retire before the tower outlives him"}
   ],
   "encounters": [
     {"id": "E1", "node": "N3", "name": "Brass guardians", "difficulty": "moderate",
@@ -104,7 +118,11 @@ The adventure's skeleton as data. The checker reads it to prove the structure wo
 
 **Conclusions** are facts the players must work out (`required: true`) or may work out (`false`). **Clues** live `in` a node and `points_to` a node id or a conclusion id.
 
-**NPCs:** `id`, `name` (must appear in the book), `appears` (node ids), `wants`, `knows`, `secret`.
+**NPCs:** `id`, `name` (must appear in the book), `ancestry` (D&D), `appears` (node ids), `wants`, `knows`, `secret`. **Major NPCs** (`"major": true`; anyone in two or more nodes counts as major unless you set `"major": false`) also take the person pass from [Writing NPCs](npcs.md): `life`, `loves`, `contradiction`, `lore`, `ties` (`[{"npc": "<id>", "history": "..."}]`), `without_heroes`, `trope` and `twist`, plus an optional `wrong_about`. The checker warns on a major NPC missing any of them, errors on a tie to an unknown NPC, and warns on overused names, names that share their first three letters, rulebook example names, and names used in other campaigns in the same parent folder.
+
+**Naming:** `naming[]`, one entry per people or region: `people`, `style`, `sounds`. Decide it before naming anyone.
+
+**Series:** optional `series` (a short string). Packages that share it (a campaign and its sequel) may reuse each other's NPC names without a warning.
 
 **Encounters:** `id`, `node`, `name`, `difficulty`, `creatures[]`, `hazards[]`, `allies_count` (extra allied combatants for this fight only), `party_level` (when the party has levelled since the start, e.g. in part 3 of a campaign), `avoidable`, `over_budget_reason` (only for deliberate set pieces, with an escape route written in the text). The checker also warns when a fight is under half the Low budget (5e): probably trivial.
 - D&D 5e creature: `name`, `cr` as a string (`"1/4"`, `"9"`), `xp` (checked against the CR), `count`, `source`.

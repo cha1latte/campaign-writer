@@ -50,6 +50,7 @@ then add the scene padding): E2: troll whelp at (20, 10); hero arrives on the pa
 ## Actors
 - From the system compendium: Troll (SRD 5.2.1), Guard ×2 …
 - Custom (build from the Bestiary page, then read the computed sheet back): Troll Whelp …
+- Named NPCs: put each NPC's card on its actor's Biography too (GM half: the card, with the secret on a line starting `Secret:`; public half: only what a stranger could see or overhear). A GM, human or AI, finds it on the sheet mid-scene instead of guessing.
 - Pregens / player character: pregens/01-…md
 
 ## Handouts journal (player-safe, GM shares by hand)
@@ -61,7 +62,7 @@ handouts/found/01-…md (given out in N3), …
 <the block below, filled in; any campaign with fights also gets the combat line>
 ```
 
-**Combat line** (about 230 characters, any campaign with fights): `In fights, NPCs speak dialogue only: one short sentence after a notable action (big hit, crit, miss, kill, spell), no narration or action descriptions; the roll cards carry the dice. Mostly round 1, then big moments. Beasts don't talk.` The runner takes each creature's voice from the encounter's **Lines** (on the Source page), never from the actor sheet: Familiar doesn't read the biography field.
+**Combat line** (about 230 characters, any campaign with fights): `In fights, NPCs speak dialogue only: one short sentence after a notable action (big hit, crit, miss, kill, spell), no narration or action descriptions; the roll cards carry the dice. Mostly round 1, then big moments. Beasts don't talk.` The runner takes each creature's combat voice from the encounter's **Lines** (on the Source page).
 
 ## 3. Teach-mode rules for the AI GM
 

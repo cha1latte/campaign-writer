@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.7.0 (2026-11-09)
+
+**NPCs: people, not plot parts**
+- New `references/npcs.md`.
+  - **Person pass** for major NPCs (anyone in two or more nodes, antagonists, companions): an ordinary life before the heroes came, something they love, a contradiction, the lore that shapes them, ties with history to other NPCs, what they'll do if nobody steps in, and an optional belief the adventure can prove wrong.
+  - **Trope test:** name the stock character an NPC is closest to, then change two things the table will see. Apply it hardest to the NPC at the centre of the plot.
+  - **Minor NPCs** stay short: a want, one specific detail, one line.
+- **Card layout:** one field per line (Voice and Line, Wants, Knows, Hides, If pushed, Ties, Wrong about, If nobody comes). Every major card keeps **If pushed** with the line the NPC says when they break. Three new varied sample cards replace the old single example, whose phrases kept turning up word for word in generated books.
+- **Names:**
+  - Decide how each people in the setting names itself (`naming` in `campaign.json`) before naming anyone, and invent names from that rule.
+  - A list of overused names, pulled from names that repeated across real campaigns.
+  - Intentional reuse between a campaign and its sequel is marked with a shared `series`.
+- **D&D lore, rewritten with sources:**
+  - culture, faith, lifespan and lineages for nine of the ten 2024 species (aasimar still to verify);
+  - name patterns written as sounds instead of rulebook example names, which were being reused as-is;
+  - creature lore for goblinoids (Fey in 2024), hags (Fey, covens), gnolls, trolls, giants, vampires, liches, mind flayers, beholders, yuan-ti, kenku, owlbears and dragons;
+  - a new Faith section (invent a faith people *do* for shared packages; canon gods only for private tables).
+- **Checker** (`npcs` area):
+  - warns on a major NPC missing the person pass, missing `ancestry` (D&D), and missing `naming` rules;
+  - errors on a tie to an unknown NPC;
+  - warns on a card with no **If pushed** or with Wants/Knows/Hides run together;
+  - warns on overused names and rulebook example names (NPCs and pregens), and on two names sharing their first three letters;
+  - warns on names already used in other campaigns in the same parent folder;
+  - warns on phrases copied from the sample cards.
+- Quality bar: a new *cast reader* pass, and the NPC and D&D-fit rows ask for depth and lore. Gate 2 (Is it D&D?): D5 now counts people whose ancestry, faith and history show in what they do.
+- Foundry hand-off: put each NPC's card on its actor's Biography (GM half with a `Secret:` line, public half for players).
+- Found in use:
+  - Across ten unrelated campaigns, the same sixteen names kept coming back (Tamsin, Odile, Pell and Osric three times each).
+  - Rulebook example names went straight into books.
+  - The old sample card's "broad as a door" and "says 'aye' before bad news" turned up word for word.
+  - A player said the characters felt "more like tropes than fleshed out people".
+- Tested by rewriting one example adventure's cast three times with a fresh writer and only the skill, each scored blind against the old cast by a fresh judge. The new cast won every round: 7.5 vs 6, 8 vs 6, 7.5 vs 5.5, with the biggest gains on ties between NPCs (9 vs 4) and people over plot parts (8 vs 5). The 8.5 target wasn't reached. The judges' remaining complaints were cards that lean on details set up in other chapters (now covered by "every card reads on its own") and a central NPC who stays close to type.
+
 ## 1.6.1 (2026-11-06)
 
 **Lessons from looping a campaign through the gates (eight simulated rounds)**

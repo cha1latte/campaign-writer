@@ -32,6 +32,7 @@ Turn the request into a brief: system, players and level, solo or group, length,
 1. **Pick a structure** that fits the wish ([Structures](references/structures.md)). A monster hunt is a pointcrawl with a tracking clock. A mystery is node-based. A one-shot is five scenes. A campaign is three to five linked adventures under one threat.
 2. **Find the engine.** One antagonist or force with a goal, a timeline that advances whether or not the heroes act, and a real choice at the end. Avoid stock twists (the quest-giver was the villain all along) unless the clues earn them.
 3. **Root it in the game.** For D&D, give every named NPC an ancestry, then a name that sounds like it, and make creatures act on their lore (kobolds revere dragons; copper dragons joke and riddle). See [Rooting a D&D adventure in D&D](references/dnd-lore.md).
+   **Write people, not plot parts.** Decide how each people in the setting names itself (`naming`) before naming anyone, and invent names from that rule. Give every major NPC the person pass: an ordinary life before the heroes came, something they love, a contradiction, a tie with history to another NPC, the lore that shapes them, and what they'll do if nobody steps in; then name the trope they're closest to and change two things that show at the table. See [Writing NPCs](references/npcs.md).
 4. **Lay out** nodes, clues (three per conclusion), NPCs (want, know, hide), encounters (budgeted with [D&D 5e](references/systems/dnd5e.md), [Pathfinder 2e](references/systems/pf2e.md) or [another system](references/systems/other.md)), rewards and at least three endings. Field reference: [campaign.json](references/campaign-json.md).
 5. **Teach mode:** pick the style (Stealth by default, Open for classrooms and tutors), set two to five learning objectives, the misconception each one provokes, puzzles whose *answer comes from the concept*, three-step hint ladders, scripts that recompute every numeric answer, and the sources you checked. In Stealth, also design the disguise: an analogy world rather than a rename, a story about something else, a `lexicon` that keeps real jargon out of anything the player reads, and a word ladder (`words`) that introduces the world's own words at most three per node, glossed on first use, so the opening doesn't flood a newcomer. Puzzles go in no more than about a third of the scenes (activity beats, where the world just reacts, are free). Write `teach.model` now too: for each real thing or role the world stands in for, what it is, where it lives, who can change it and how it moves (the checker requires it in Stealth; step 5 uses it). See [Teach mode](references/teach-mode.md).
 6. Run `python <skill>/tools/check_campaign.py campaigns/<slug> --bones`. It checks only the skeleton (reachability, clues, encounter budgets, Teach alignment, puzzle scripts). Fix every error before you write prose.
@@ -40,7 +41,7 @@ Turn the request into a brief: system, players and level, solo or group, length,
 
 Write `book/NN-name.md` chapters in the order and format in [Writing the book](references/writing-the-book.md). Size it to the table: about 3,000–5,000 words of book per session of play (a one-shot is 6,000–10,000), not counting stat blocks. Write: overview and running guide, the adventure itself (one heading per node, tagged `{#id}`), NPCs, bestiary, rewards and endings, appendices, credits. Teach mode adds a Learning Guide with objectives, worked solutions and debrief questions.
 
-Write like a good published module, not like a chatbot: concrete nouns, short read-aloud, mechanics inline ("**DC 13 Wisdom (Survival)**: the tracks are a day old"), and every NPC with a voice and a want. The checker flags stock AI phrasing. Rewrite those lines; don't just swap synonyms.
+Write like a good published module, not like a chatbot: concrete nouns, short read-aloud, mechanics inline ("**DC 13 Wisdom (Survival)**: the tracks are a day old"), and every NPC with a voice, a want and a life of their own. The checker flags stock AI phrasing, overused names, names reused from your other campaigns, and phrases copied from this skill's examples. Rewrite those lines; don't just swap synonyms.
 
 ## 4. Maps, handouts and pregens
 
@@ -100,7 +101,8 @@ If the requester is the GM, add the GM pitch (a few lines: what's really going o
 | [maps-and-handouts.md](references/maps-and-handouts.md) | Map specs, handouts, pregens |
 | [teach-mode.md](references/teach-mode.md) | Any educational request |
 | [teach-allegory-audit.md](references/teach-allegory-audit.md) | Teach mode, after drafting: the model, the walk, six failure classes |
-| [dnd-lore.md](references/dnd-lore.md) | Any D&D adventure: species, names, creature lore, system names |
+| [npcs.md](references/npcs.md) | Every adventure: the person pass, the trope test, naming rules, card examples |
+| [dnd-lore.md](references/dnd-lore.md) | Any D&D adventure: species lore, names, creature lore, faith, system names |
 | [systems/dnd5e.md](references/systems/dnd5e.md) | D&D 5e (2024 or 2014) |
 | [systems/pf2e.md](references/systems/pf2e.md) | Pathfinder 2e (remaster) |
 | [systems/other.md](references/systems/other.md) | Any other system |
