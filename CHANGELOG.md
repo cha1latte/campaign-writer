@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.8.0 (2026-11-19)
+
+**Gate 4 (easy to follow), and simulations that test the real GM**
+- **New Gate 4, "Is it easy to follow?"** (`references/three-gates.md`), with six criteria: short replies, one thing at a time, plain words, no recap needed, easy numbers, light out-of-character load. Caps: the player says they're lost or overwhelmed; more than three "who is / what is" questions in the first hour. `Easy` is now required on the `Final:` line, and the checker reads it.
+- **Fun** adds F8 (the world pushes back) and F9 (the main line pulls). New caps: skipping time twice with nothing at stake; the GM saying nothing will happen while the player thinks.
+- **D&D** adds D7 (honest difficulty for the player's own plans: a skill challenge, a real cost, a chance to fail) and D8 (rules used correctly). New cap: a session with no fight and no hazard that could cost anything.
+- **Calibrate first:** score a real session the player didn't enjoy before trusting simulated scores.
+- **Simulated GM runs the real live setup** (installed table rules, the AI GM's own play rules, the runner guide), on the real table's model, instead of "run the book faithfully". The player profile comes from the latest real session. Why: a sequel campaign scored 6 to 7 in simulation, then bored its real player. Cold judges on the real log gave Fun 5.6, D&D 4.0, Easy 4.2. The simulated GM had never improvised; the real one gave an off-book plan a free win on one roll while the villain left in the background.
+- **Teach:** the "shown" beat is an event (two identical things diverge in front of the player), not a run of NPC explanations.
+- New fixes: split overstuffed scenes; write "off the page" boxes for likely detours; keep the clock visible in the fiction.
+
 ## 1.7.0 (2026-11-09)
 
 **NPCs: people, not plot parts**

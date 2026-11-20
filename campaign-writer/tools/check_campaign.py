@@ -844,20 +844,20 @@ GATE_RE = re.compile(r"^\s*Final:\s*(.+)$", re.I | re.M)
 
 
 def check_gates(c, root, rep):
-    """The three gates (references/three-gates.md): Fun, D&D and, in Teach mode, Teaches, each 8.5+ from a playthrough."""
+    """The gates (references/three-gates.md): Fun, D&D, Easy and, in Teach mode, Teaches, each 8.5+ from a playthrough."""
     log = Path(root) / "gates-log.md"
     teach = c.get("mode") == "teach"
     if not log.is_file():
-        rep.warn("gates", "no gates-log.md; before hand-over score the three gates (Is it fun? Is it D&D?"
+        rep.warn("gates", "no gates-log.md; before hand-over score the gates (Is it fun? Is it D&D? Is it easy to follow?"
                           + (" Does it really teach?" if teach else "") + ") from a playthrough with cold judges, "
                           "8.5 minimum each (references/three-gates.md)")
         return
     lines = GATE_RE.findall(log.read_text(encoding="utf-8"))
     if not lines:
-        rep.warn("gates", "gates-log.md has no 'Final: Fun N / D&D N / Teaches N' line yet")
+        rep.warn("gates", "gates-log.md has no 'Final: Fun N / D&D N / Easy N / Teaches N' line yet")
         return
     last = lines[-1]
-    want = [("fun", r"fun"), ("D&D", r"d&d|dnd|game")] + ([("teaches", r"teach(?:es)?")] if teach else [])
+    want = [("fun", r"fun"), ("D&D", r"d&d|dnd|game"), ("easy", r"easy")] + ([("teaches", r"teach(?:es)?")] if teach else [])
     bad, got = [], []
     for name, pat in want:
         m = re.search(r"\b(?:" + pat + r")\s*[:=]?\s*(\d+(?:\.\d+)?)", last, re.I)
@@ -872,7 +872,7 @@ def check_gates(c, root, rep):
         rep.err("gates", f"gates under {GATE_MIN}: {', '.join(bad)}; fix the lowest criterion at its root and run another round")
     elif got:
         how = "book only (capped at 7)" if re.search(r"book only", last, re.I) else "see the log for what it rests on"
-        rep.ok("gates", f"three gates passed: {', '.join(got)} ({how})")
+        rep.ok("gates", f"gates passed: {', '.join(got)} ({how})")
 
 
 def name_words(name):

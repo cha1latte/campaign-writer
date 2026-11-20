@@ -40,7 +40,7 @@ Do each pass as a different reader, re-reading the actual files rather than reca
 
 Record the final scores in the package README and the receipt's *Scores* line.
 
-**Then the three gates.** A package can score 9 on every part above and still be no fun to play: these parts are scored from the author's chair. Before hand-over, run the [three gates](three-gates.md) (Is it fun? Is it D&D? Does it really teach?) from the player's chair, from a playthrough, with cold judges, to 8.5 or better.
+**Then the gates.** A package can score 9 on every part above and still be no fun to play: these parts are scored from the author's chair. Before hand-over, run the [gates](three-gates.md) (Is it fun? Is it D&D? Is it easy to follow? Does it really teach?) from the player's chair, from a playthrough, with cold judges, to 8.5 or better.
 
 ## Honest reporting
 
